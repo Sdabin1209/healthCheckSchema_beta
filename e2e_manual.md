@@ -12,6 +12,7 @@
 
 ```
 schemas/                 JSON Schema 22개 (경계별, 자체 완결) + INDEX.md
+  types/                 경계 스키마가 참조하는 공통 타입 95개 (타입별 파일) + INDEX.md
 tests/e2e/
   run_e2e.py             검사기 (pip install jsonschema)
   scenarios/             시나리오 18개 (e2e_*.json) + index.json

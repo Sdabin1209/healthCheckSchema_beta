@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "types/WholeQuestion.json",
+  "$ref": "#/$defs/WholeQuestion",
+  "$defs": {
+    "QuestionId": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9가-힣_.\\-]{1,64}$"
+    },
+    "WholeQuestion": {
+      "type": "object",
+      "properties": {
+        "question_id": {
+          "$ref": "#/$defs/QuestionId"
+        },
+        "whole_question": {
+          "const": true
+        }
+      },
+      "required": [
+        "question_id",
+        "whole_question"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

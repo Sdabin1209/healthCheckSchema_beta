@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "types/CurrentValue.json",
+  "$ref": "#/$defs/CurrentValue",
+  "$defs": {
+    "CurrentValue": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "answer": {
+              "$ref": "#/$defs/Value"
+            }
+          },
+          "required": [
+            "answer"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "const": "UNKNOWN_RECORD"
+        },
+        {
+          "const": "REFUSAL_RECORD"
+        },
+        {
+          "const": "NONE"
+        }
+      ]
+    },
+    "Value": {
+      "oneOf": [
+        {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        {
+          "type": "object",
+          "properties": {
+            "amount": {
+              "type": "number",
+              "minimum": -100000,
+              "maximum": 100000
+            },
+            "unit": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 2000
+            }
+          },
+          "required": [
+            "amount",
+            "unit"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    }
+  }
+}

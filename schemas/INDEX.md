@@ -37,3 +37,7 @@ Draft202012Validator(schema).validate({"items": []})
 ```
 
 Schema는 값의 구조만 검사한다. 발화를 올바른 의도로 분류했는지, 문장이 적절한지는 각 컴포넌트가 검증한다.
+
+## 공통 타입 (`types/`)
+
+경계 스키마 안의 `$ref`(`#/$defs/SlotRef` 등)가 가리키는 타입 95개는 타입별 파일로도 제공한다: [`types/INDEX.md`](types/INDEX.md). 각 파일은 그 타입과 연쇄 참조하는 타입을 `$defs`에 모두 담아 혼자 쓸 수 있다.

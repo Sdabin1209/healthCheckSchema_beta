@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "types/SessionStatus.json",
+  "$ref": "#/$defs/SessionStatus",
+  "$defs": {
+    "SessionStatus": {
+      "oneOf": [
+        {
+          "const": "IN_PROGRESS"
+        },
+        {
+          "const": "PAUSED_RISK"
+        },
+        {
+          "const": "ENDED_COMPLETE"
+        },
+        {
+          "const": "ENDED_STAFF"
+        },
+        {
+          "const": "ENDED_LEFT"
+        },
+        {
+          "const": "ENDED_USER_STOP"
+        }
+      ]
+    }
+  }
+}

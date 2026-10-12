@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "types/NoticeKind.json",
+  "$ref": "#/$defs/NoticeKind",
+  "$defs": {
+    "NoticeKind": {
+      "oneOf": [
+        {
+          "const": "CORRECTION_ACK"
+        },
+        {
+          "const": "KEPT_PREVIOUS"
+        },
+        {
+          "const": "RESUME"
+        },
+        {
+          "const": "SURVEY_STOPPED"
+        },
+        {
+          "const": "GUIDE"
+        },
+        {
+          "const": "DEFERRED"
+        }
+      ]
+    }
+  }
+}

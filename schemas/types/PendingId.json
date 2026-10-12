@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "types/PendingId.json",
+  "$ref": "#/$defs/PendingId",
+  "$defs": {
+    "PendingId": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9가-힣_.\\-]{1,64}$"
+    }
+  }
+}

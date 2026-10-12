@@ -1,0 +1,101 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "types/SayValue.json",
+  "$ref": "#/$defs/SayValue",
+  "$defs": {
+    "QuestionId": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9가-힣_.\\-]{1,64}$"
+    },
+    "SayValue": {
+      "type": "object",
+      "properties": {
+        "slot": {
+          "$ref": "#/$defs/SlotRef"
+        },
+        "question_name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "value": {
+          "$ref": "#/$defs/Value"
+        },
+        "role": {
+          "oneOf": [
+            {
+              "const": "CURRENT"
+            },
+            {
+              "const": "PENDING"
+            },
+            {
+              "const": "JUST_SAVED"
+            },
+            {
+              "const": "SAID"
+            }
+          ]
+        }
+      },
+      "required": [
+        "slot",
+        "question_name",
+        "value",
+        "role"
+      ],
+      "additionalProperties": false
+    },
+    "SlotRef": {
+      "type": "object",
+      "properties": {
+        "question_id": {
+          "$ref": "#/$defs/QuestionId"
+        },
+        "repeat_key": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9가-힣_.\\-]{0,64}$"
+        },
+        "slot_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9가-힣_.\\-]{1,64}$"
+        }
+      },
+      "required": [
+        "question_id",
+        "repeat_key",
+        "slot_id"
+      ],
+      "additionalProperties": false
+    },
+    "Value": {
+      "oneOf": [
+        {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        {
+          "type": "object",
+          "properties": {
+            "amount": {
+              "type": "number",
+              "minimum": -100000,
+              "maximum": 100000
+            },
+            "unit": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 2000
+            }
+          },
+          "required": [
+            "amount",
+            "unit"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    }
+  }
+}

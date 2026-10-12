@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "types/TurnKind.json",
+  "$ref": "#/$defs/TurnKind",
+  "$defs": {
+    "TurnKind": {
+      "oneOf": [
+        {
+          "const": "SESSION_START"
+        },
+        {
+          "const": "UTTERANCE"
+        },
+        {
+          "const": "RESUME"
+        },
+        {
+          "const": "INTERVENTION_END"
+        },
+        {
+          "const": "END_LEFT"
+        }
+      ]
+    }
+  }
+}

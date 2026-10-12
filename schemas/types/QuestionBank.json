@@ -1,0 +1,596 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "types/QuestionBank.json",
+  "$ref": "#/$defs/QuestionBank",
+  "$defs": {
+    "FillValue": {
+      "oneOf": [
+        {
+          "const": "REMAINING_COUNT"
+        }
+      ]
+    },
+    "FixedSentence": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/$defs/FixedSentenceKey"
+        },
+        "sentence": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        }
+      },
+      "required": [
+        "key",
+        "sentence"
+      ],
+      "additionalProperties": false
+    },
+    "FixedSentenceKey": {
+      "oneOf": [
+        {
+          "const": "ASK_REPEAT"
+        },
+        {
+          "const": "OOS_NOTICE"
+        },
+        {
+          "const": "CALL_STAFF"
+        },
+        {
+          "const": "FAREWELL"
+        },
+        {
+          "const": "ASK_CONFIRM"
+        },
+        {
+          "const": "ASK_CORRECTION_TARGET"
+        },
+        {
+          "const": "ASK_FINISH"
+        },
+        {
+          "const": "RISK_NOTICE"
+        },
+        {
+          "const": "RESUME"
+        },
+        {
+          "const": "SURVEY_STOPPED"
+        },
+        {
+          "const": "WAIT_NOTICE"
+        },
+        {
+          "const": "ASK_STOP"
+        },
+        {
+          "const": "STAFF_NOTICE"
+        },
+        {
+          "const": "DEFERRED"
+        }
+      ]
+    },
+    "GuideItem": {
+      "type": "object",
+      "properties": {
+        "guide_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9가-힣_.\\-]{1,64}$"
+        },
+        "selection_criterion": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "per_question": {
+          "type": "boolean"
+        },
+        "sentence": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 2000
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "fill_value": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/FillValue"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "guide_id",
+        "selection_criterion",
+        "per_question",
+        "sentence",
+        "fill_value"
+      ],
+      "additionalProperties": false
+    },
+    "Policy": {
+      "type": "object",
+      "properties": {
+        "question_limit": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 20
+        },
+        "unknown_accept_after": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 20
+        },
+        "refusal_accept_after": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 20
+        }
+      },
+      "required": [
+        "question_limit",
+        "unknown_accept_after",
+        "refusal_accept_after"
+      ],
+      "additionalProperties": false
+    },
+    "Prerequisite": {
+      "type": "object",
+      "properties": {
+        "slot": {
+          "$ref": "#/$defs/SlotRef"
+        },
+        "value": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        }
+      },
+      "required": [
+        "slot",
+        "value"
+      ],
+      "additionalProperties": false
+    },
+    "QuestionBank": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000
+        },
+        "questions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/QuestionDef"
+          },
+          "minItems": 1,
+          "maxItems": 200
+        },
+        "session_settings": {
+          "$ref": "#/$defs/SessionSettings"
+        }
+      },
+      "required": [
+        "version",
+        "questions",
+        "session_settings"
+      ],
+      "additionalProperties": false
+    },
+    "QuestionDef": {
+      "type": "object",
+      "properties": {
+        "question_id": {
+          "$ref": "#/$defs/QuestionId"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "order": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000
+        },
+        "prerequisite": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Prerequisite"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "question_sentence": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "refusal_explanation": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "guide_sentences": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/QuestionGuideSentence"
+          },
+          "maxItems": 10
+        },
+        "affected_followups": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/QuestionId"
+          },
+          "maxItems": 50,
+          "uniqueItems": true
+        },
+        "policy": {
+          "$ref": "#/$defs/Policy"
+        },
+        "repeat_keys": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9가-힣_.\\-]{1,64}$"
+          },
+          "maxItems": 50,
+          "uniqueItems": true
+        },
+        "slots": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SlotDef"
+          },
+          "minItems": 1,
+          "maxItems": 20
+        }
+      },
+      "required": [
+        "question_id",
+        "name",
+        "order",
+        "prerequisite",
+        "question_sentence",
+        "refusal_explanation",
+        "guide_sentences",
+        "affected_followups",
+        "policy",
+        "repeat_keys",
+        "slots"
+      ],
+      "additionalProperties": false
+    },
+    "QuestionGuideSentence": {
+      "type": "object",
+      "properties": {
+        "guide_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9가-힣_.\\-]{1,64}$"
+        },
+        "sentence": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        }
+      },
+      "required": [
+        "guide_id",
+        "sentence"
+      ],
+      "additionalProperties": false
+    },
+    "QuestionId": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9가-힣_.\\-]{1,64}$"
+    },
+    "RiskResponse": {
+      "oneOf": [
+        {
+          "const": "IMMEDIATE"
+        },
+        {
+          "const": "ON_RESULT"
+        }
+      ]
+    },
+    "RiskRule": {
+      "type": "object",
+      "properties": {
+        "operator": {
+          "oneOf": [
+            {
+              "const": "="
+            },
+            {
+              "const": ">="
+            }
+          ]
+        },
+        "value": {
+          "$ref": "#/$defs/Value"
+        },
+        "response": {
+          "$ref": "#/$defs/RiskResponse"
+        }
+      },
+      "required": [
+        "operator",
+        "value",
+        "response"
+      ],
+      "additionalProperties": false
+    },
+    "SessionSettings": {
+      "type": "object",
+      "properties": {
+        "risk_phrases": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          },
+          "maxItems": 200
+        },
+        "confirm_limit": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 20
+        },
+        "unrecognized_streak_limit": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 20
+        },
+        "ask_limit": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 20
+        },
+        "fixed_sentences": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/FixedSentence"
+          },
+          "maxItems": 20
+        },
+        "guide_list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/GuideItem"
+          },
+          "maxItems": 50
+        }
+      },
+      "required": [
+        "risk_phrases",
+        "confirm_limit",
+        "unrecognized_streak_limit",
+        "ask_limit",
+        "fixed_sentences",
+        "guide_list"
+      ],
+      "additionalProperties": false
+    },
+    "SlotDef": {
+      "type": "object",
+      "properties": {
+        "slot_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9가-힣_.\\-]{1,64}$"
+        },
+        "units": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/UnitDef"
+          },
+          "maxItems": 10
+        },
+        "choices": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          },
+          "maxItems": 30
+        },
+        "yes_no_map": {
+          "anyOf": [
+            {
+              "type": "object",
+              "properties": {
+                "yes": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 2000
+                },
+                "no": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 2000
+                }
+              },
+              "required": [
+                "yes",
+                "no"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "required": {
+          "type": "boolean"
+        },
+        "reask_sentence": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "risk_rule": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/RiskRule"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "slot_id",
+        "units",
+        "choices",
+        "yes_no_map",
+        "required",
+        "reask_sentence",
+        "risk_rule"
+      ],
+      "additionalProperties": false
+    },
+    "SlotRef": {
+      "type": "object",
+      "properties": {
+        "question_id": {
+          "$ref": "#/$defs/QuestionId"
+        },
+        "repeat_key": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9가-힣_.\\-]{0,64}$"
+        },
+        "slot_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9가-힣_.\\-]{1,64}$"
+        }
+      },
+      "required": [
+        "question_id",
+        "repeat_key",
+        "slot_id"
+      ],
+      "additionalProperties": false
+    },
+    "UnitDef": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "synonyms": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          },
+          "maxItems": 10
+        },
+        "range": {
+          "anyOf": [
+            {
+              "type": "array",
+              "items": {
+                "type": "number",
+                "minimum": -100000,
+                "maximum": 100000
+              },
+              "minItems": 2,
+              "maxItems": 2
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "convert_to": {
+          "anyOf": [
+            {
+              "type": "object",
+              "properties": {
+                "unit": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 2000
+                },
+                "factor": {
+                  "type": "number",
+                  "exclusiveMinimum": 0,
+                  "maximum": 100000
+                }
+              },
+              "required": [
+                "unit",
+                "factor"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "name",
+        "synonyms",
+        "range",
+        "convert_to"
+      ],
+      "additionalProperties": false
+    },
+    "Value": {
+      "oneOf": [
+        {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        {
+          "type": "object",
+          "properties": {
+            "amount": {
+              "type": "number",
+              "minimum": -100000,
+              "maximum": 100000
+            },
+            "unit": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 2000
+            }
+          },
+          "required": [
+            "amount",
+            "unit"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    }
+  }
+}

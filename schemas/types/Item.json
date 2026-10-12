@@ -1,0 +1,220 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "types/Item.json",
+  "$ref": "#/$defs/Item",
+  "$defs": {
+    "Intent": {
+      "oneOf": [
+        {
+          "const": "ANSWERED_INTENT"
+        },
+        {
+          "const": "CORRECTION_MARKED"
+        },
+        {
+          "const": "CONFIRM_YES"
+        },
+        {
+          "const": "CONFIRM_NO"
+        },
+        {
+          "const": "SAYS_UNKNOWN"
+        },
+        {
+          "const": "SAYS_REFUSAL"
+        },
+        {
+          "const": "PROGRESS_OP"
+        },
+        {
+          "const": "GUIDE_REQUEST"
+        },
+        {
+          "const": "USER_CALLED_STAFF"
+        },
+        {
+          "const": "OUT_OF_SCOPE"
+        },
+        {
+          "const": "UNRECOGNIZED"
+        },
+        {
+          "const": "RISK_SIGNAL"
+        }
+      ]
+    },
+    "Item": {
+      "type": "object",
+      "properties": {
+        "item_no": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000
+        },
+        "target": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Target"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "value": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 2000
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "source_text": {
+          "$ref": "#/$defs/SourceText"
+        },
+        "intent": {
+          "$ref": "#/$defs/Intent"
+        },
+        "progress_op": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ProgressOp"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "guide_id": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9가-힣_.\\-]{1,64}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "item_no",
+        "target",
+        "value",
+        "source_text",
+        "intent",
+        "progress_op",
+        "guide_id"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "intent": {
+                "enum": [
+                  "ANSWERED_INTENT"
+                ]
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "target": {
+                "not": {
+                  "enum": [
+                    null
+                  ]
+                }
+              },
+              "value": {
+                "not": {
+                  "enum": [
+                    null
+                  ]
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "ProgressOp": {
+      "oneOf": [
+        {
+          "const": "REPEAT"
+        },
+        {
+          "const": "WAIT"
+        },
+        {
+          "const": "LATER"
+        },
+        {
+          "const": "STOP"
+        }
+      ]
+    },
+    "QuestionId": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9가-힣_.\\-]{1,64}$"
+    },
+    "SlotRef": {
+      "type": "object",
+      "properties": {
+        "question_id": {
+          "$ref": "#/$defs/QuestionId"
+        },
+        "repeat_key": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9가-힣_.\\-]{0,64}$"
+        },
+        "slot_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9가-힣_.\\-]{1,64}$"
+        }
+      },
+      "required": [
+        "question_id",
+        "repeat_key",
+        "slot_id"
+      ],
+      "additionalProperties": false
+    },
+    "SourceText": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2000
+    },
+    "Target": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/SlotRef"
+        },
+        {
+          "$ref": "#/$defs/WholeQuestion"
+        }
+      ]
+    },
+    "WholeQuestion": {
+      "type": "object",
+      "properties": {
+        "question_id": {
+          "$ref": "#/$defs/QuestionId"
+        },
+        "whole_question": {
+          "const": true
+        }
+      },
+      "required": [
+        "question_id",
+        "whole_question"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

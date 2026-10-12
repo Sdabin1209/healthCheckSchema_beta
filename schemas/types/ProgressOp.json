@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "types/ProgressOp.json",
+  "$ref": "#/$defs/ProgressOp",
+  "$defs": {
+    "ProgressOp": {
+      "oneOf": [
+        {
+          "const": "REPEAT"
+        },
+        {
+          "const": "WAIT"
+        },
+        {
+          "const": "LATER"
+        },
+        {
+          "const": "STOP"
+        }
+      ]
+    }
+  }
+}

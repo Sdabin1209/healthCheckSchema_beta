@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "types/AlertKind.json",
+  "$ref": "#/$defs/AlertKind",
+  "$defs": {
+    "AlertKind": {
+      "oneOf": [
+        {
+          "const": "RISK"
+        },
+        {
+          "const": "CALL_STAFF"
+        },
+        {
+          "const": "USER_CALLED_STAFF"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "types/GuideItem.json",
+  "$ref": "#/$defs/GuideItem",
+  "$defs": {
+    "FillValue": {
+      "oneOf": [
+        {
+          "const": "REMAINING_COUNT"
+        }
+      ]
+    },
+    "GuideItem": {
+      "type": "object",
+      "properties": {
+        "guide_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9가-힣_.\\-]{1,64}$"
+        },
+        "selection_criterion": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "per_question": {
+          "type": "boolean"
+        },
+        "sentence": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 2000
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "fill_value": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/FillValue"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "guide_id",
+        "selection_criterion",
+        "per_question",
+        "sentence",
+        "fill_value"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

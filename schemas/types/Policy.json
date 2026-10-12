@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "types/Policy.json",
+  "$ref": "#/$defs/Policy",
+  "$defs": {
+    "Policy": {
+      "type": "object",
+      "properties": {
+        "question_limit": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 20
+        },
+        "unknown_accept_after": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 20
+        },
+        "refusal_accept_after": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 20
+        }
+      },
+      "required": [
+        "question_limit",
+        "unknown_accept_after",
+        "refusal_accept_after"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

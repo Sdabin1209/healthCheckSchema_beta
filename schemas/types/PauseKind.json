@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "types/PauseKind.json",
+  "$ref": "#/$defs/PauseKind",
+  "$defs": {
+    "PauseKind": {
+      "oneOf": [
+        {
+          "const": "PAUSE"
+        },
+        {
+          "const": "RESUME"
+        }
+      ]
+    }
+  }
+}

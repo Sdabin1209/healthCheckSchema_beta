@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "types/StoreAction.json",
+  "$ref": "#/$defs/StoreAction",
+  "$defs": {
+    "StoreAction": {
+      "oneOf": [
+        {
+          "const": "FIRST_WRITE"
+        },
+        {
+          "const": "NEW_REVISION"
+        },
+        {
+          "const": "RECORD_UNKNOWN"
+        },
+        {
+          "const": "RECORD_REFUSAL"
+        },
+        {
+          "const": "SET_PENDING"
+        },
+        {
+          "const": "ACCEPT_PENDING"
+        },
+        {
+          "const": "DROP_PENDING"
+        },
+        {
+          "const": "INVALIDATE"
+        }
+      ]
+    }
+  }
+}

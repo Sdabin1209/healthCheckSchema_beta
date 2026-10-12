@@ -1,0 +1,223 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "types/SlotDef.json",
+  "$ref": "#/$defs/SlotDef",
+  "$defs": {
+    "RiskResponse": {
+      "oneOf": [
+        {
+          "const": "IMMEDIATE"
+        },
+        {
+          "const": "ON_RESULT"
+        }
+      ]
+    },
+    "RiskRule": {
+      "type": "object",
+      "properties": {
+        "operator": {
+          "oneOf": [
+            {
+              "const": "="
+            },
+            {
+              "const": ">="
+            }
+          ]
+        },
+        "value": {
+          "$ref": "#/$defs/Value"
+        },
+        "response": {
+          "$ref": "#/$defs/RiskResponse"
+        }
+      },
+      "required": [
+        "operator",
+        "value",
+        "response"
+      ],
+      "additionalProperties": false
+    },
+    "SlotDef": {
+      "type": "object",
+      "properties": {
+        "slot_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9가-힣_.\\-]{1,64}$"
+        },
+        "units": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/UnitDef"
+          },
+          "maxItems": 10
+        },
+        "choices": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          },
+          "maxItems": 30
+        },
+        "yes_no_map": {
+          "anyOf": [
+            {
+              "type": "object",
+              "properties": {
+                "yes": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 2000
+                },
+                "no": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 2000
+                }
+              },
+              "required": [
+                "yes",
+                "no"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "required": {
+          "type": "boolean"
+        },
+        "reask_sentence": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "risk_rule": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/RiskRule"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "slot_id",
+        "units",
+        "choices",
+        "yes_no_map",
+        "required",
+        "reask_sentence",
+        "risk_rule"
+      ],
+      "additionalProperties": false
+    },
+    "UnitDef": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "synonyms": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          },
+          "maxItems": 10
+        },
+        "range": {
+          "anyOf": [
+            {
+              "type": "array",
+              "items": {
+                "type": "number",
+                "minimum": -100000,
+                "maximum": 100000
+              },
+              "minItems": 2,
+              "maxItems": 2
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "convert_to": {
+          "anyOf": [
+            {
+              "type": "object",
+              "properties": {
+                "unit": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 2000
+                },
+                "factor": {
+                  "type": "number",
+                  "exclusiveMinimum": 0,
+                  "maximum": 100000
+                }
+              },
+              "required": [
+                "unit",
+                "factor"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "name",
+        "synonyms",
+        "range",
+        "convert_to"
+      ],
+      "additionalProperties": false
+    },
+    "Value": {
+      "oneOf": [
+        {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        {
+          "type": "object",
+          "properties": {
+            "amount": {
+              "type": "number",
+              "minimum": -100000,
+              "maximum": 100000
+            },
+            "unit": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 2000
+            }
+          },
+          "required": [
+            "amount",
+            "unit"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    }
+  }
+}

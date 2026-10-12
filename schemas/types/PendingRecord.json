@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "types/PendingRecord.json",
+  "$ref": "#/$defs/PendingRecord",
+  "$defs": {
+    "PendingId": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9가-힣_.\\-]{1,64}$"
+    },
+    "PendingRecord": {
+      "type": "object",
+      "properties": {
+        "pending_id": {
+          "$ref": "#/$defs/PendingId"
+        },
+        "value": {
+          "$ref": "#/$defs/Value"
+        },
+        "risk_mark": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/RiskResponse"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "pending_id",
+        "value",
+        "risk_mark"
+      ],
+      "additionalProperties": false
+    },
+    "RiskResponse": {
+      "oneOf": [
+        {
+          "const": "IMMEDIATE"
+        },
+        {
+          "const": "ON_RESULT"
+        }
+      ]
+    },
+    "Value": {
+      "oneOf": [
+        {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        {
+          "type": "object",
+          "properties": {
+            "amount": {
+              "type": "number",
+              "minimum": -100000,
+              "maximum": 100000
+            },
+            "unit": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 2000
+            }
+          },
+          "required": [
+            "amount",
+            "unit"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    }
+  }
+}

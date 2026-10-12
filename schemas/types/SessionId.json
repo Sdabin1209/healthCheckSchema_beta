@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "types/SessionId.json",
+  "$ref": "#/$defs/SessionId",
+  "$defs": {
+    "SessionId": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9가-힣_.\\-]{1,64}$"
+    }
+  }
+}

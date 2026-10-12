@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "types/UtteranceResult.json",
+  "$ref": "#/$defs/UtteranceResult",
+  "$defs": {
+    "UtteranceResult": {
+      "oneOf": [
+        {
+          "const": "HAS_ANSWER"
+        },
+        {
+          "const": "REQUEST_ONLY"
+        },
+        {
+          "const": "OUT_OF_SCOPE_ONLY"
+        },
+        {
+          "const": "UNRECOGNIZED_TURN"
+        }
+      ]
+    }
+  }
+}

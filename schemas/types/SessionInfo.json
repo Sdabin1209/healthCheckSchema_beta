@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "types/SessionInfo.json",
+  "$ref": "#/$defs/SessionInfo",
+  "$defs": {
+    "SessionId": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9가-힣_.\\-]{1,64}$"
+    },
+    "SessionInfo": {
+      "type": "object",
+      "properties": {
+        "session_id": {
+          "$ref": "#/$defs/SessionId"
+        },
+        "question_bank_version": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000
+        }
+      },
+      "required": [
+        "session_id",
+        "question_bank_version"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

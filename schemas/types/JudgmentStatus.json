@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "types/JudgmentStatus.json",
+  "$ref": "#/$defs/JudgmentStatus",
+  "$defs": {
+    "JudgmentStatus": {
+      "oneOf": [
+        {
+          "const": "ANSWERED"
+        },
+        {
+          "const": "MISSING"
+        },
+        {
+          "const": "UNCLEAR"
+        },
+        {
+          "const": "CONFLICT"
+        },
+        {
+          "const": "CORRECTION"
+        },
+        {
+          "const": "UNKNOWN"
+        },
+        {
+          "const": "REJECTED"
+        },
+        {
+          "const": "PREREQUISITE_UNMET"
+        }
+      ]
+    }
+  }
+}

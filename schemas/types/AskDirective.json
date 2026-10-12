@@ -1,0 +1,201 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "types/AskDirective.json",
+  "$ref": "#/$defs/AskDirective",
+  "$defs": {
+    "AskAction": {
+      "oneOf": [
+        {
+          "const": "ASK_NEXT"
+        },
+        {
+          "const": "ASK_MISSING"
+        },
+        {
+          "const": "ASK_CLARIFY"
+        },
+        {
+          "const": "ASK_CONFIRM"
+        },
+        {
+          "const": "ASK_AFTER_UNKNOWN"
+        },
+        {
+          "const": "ASK_AFTER_REFUSAL"
+        },
+        {
+          "const": "ASK_CORRECTION_TARGET"
+        },
+        {
+          "const": "ASK_FINISH"
+        },
+        {
+          "const": "ASK_STOP"
+        }
+      ]
+    },
+    "AskDirective": {
+      "type": "object",
+      "properties": {
+        "action": {
+          "$ref": "#/$defs/AskAction"
+        },
+        "targets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Target"
+          },
+          "maxItems": 20
+        },
+        "target_pending_id": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/PendingId"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "say_values": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SayValue"
+          },
+          "maxItems": 20
+        }
+      },
+      "required": [
+        "action",
+        "targets",
+        "target_pending_id",
+        "say_values"
+      ],
+      "additionalProperties": false
+    },
+    "PendingId": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9가-힣_.\\-]{1,64}$"
+    },
+    "QuestionId": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9가-힣_.\\-]{1,64}$"
+    },
+    "SayValue": {
+      "type": "object",
+      "properties": {
+        "slot": {
+          "$ref": "#/$defs/SlotRef"
+        },
+        "question_name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "value": {
+          "$ref": "#/$defs/Value"
+        },
+        "role": {
+          "oneOf": [
+            {
+              "const": "CURRENT"
+            },
+            {
+              "const": "PENDING"
+            },
+            {
+              "const": "JUST_SAVED"
+            },
+            {
+              "const": "SAID"
+            }
+          ]
+        }
+      },
+      "required": [
+        "slot",
+        "question_name",
+        "value",
+        "role"
+      ],
+      "additionalProperties": false
+    },
+    "SlotRef": {
+      "type": "object",
+      "properties": {
+        "question_id": {
+          "$ref": "#/$defs/QuestionId"
+        },
+        "repeat_key": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9가-힣_.\\-]{0,64}$"
+        },
+        "slot_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9가-힣_.\\-]{1,64}$"
+        }
+      },
+      "required": [
+        "question_id",
+        "repeat_key",
+        "slot_id"
+      ],
+      "additionalProperties": false
+    },
+    "Target": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/SlotRef"
+        },
+        {
+          "$ref": "#/$defs/WholeQuestion"
+        }
+      ]
+    },
+    "Value": {
+      "oneOf": [
+        {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        {
+          "type": "object",
+          "properties": {
+            "amount": {
+              "type": "number",
+              "minimum": -100000,
+              "maximum": 100000
+            },
+            "unit": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 2000
+            }
+          },
+          "required": [
+            "amount",
+            "unit"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "WholeQuestion": {
+      "type": "object",
+      "properties": {
+        "question_id": {
+          "$ref": "#/$defs/QuestionId"
+        },
+        "whole_question": {
+          "const": true
+        }
+      },
+      "required": [
+        "question_id",
+        "whole_question"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

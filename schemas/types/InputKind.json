@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "types/InputKind.json",
+  "$ref": "#/$defs/InputKind",
+  "$defs": {
+    "InputKind": {
+      "oneOf": [
+        {
+          "const": "SESSION_START"
+        },
+        {
+          "const": "UTTERANCE"
+        },
+        {
+          "const": "INTERVENTION"
+        },
+        {
+          "const": "SESSION_END"
+        }
+      ]
+    }
+  }
+}

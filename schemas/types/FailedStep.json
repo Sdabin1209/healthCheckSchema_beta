@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "types/FailedStep.json",
+  "$ref": "#/$defs/FailedStep",
+  "$defs": {
+    "FailedStep": {
+      "type": "object",
+      "properties": {
+        "phase": {
+          "oneOf": [
+            {
+              "const": "BEFORE_COMMIT"
+            },
+            {
+              "const": "AFTER_COMMIT"
+            }
+          ]
+        },
+        "step": {
+          "oneOf": [
+            {
+              "const": "LoRA-A"
+            },
+            {
+              "const": "NORMALIZE"
+            },
+            {
+              "const": "JUDGE"
+            },
+            {
+              "const": "RECORD_WRITE"
+            },
+            {
+              "const": "PLAN"
+            },
+            {
+              "const": "COMMIT"
+            },
+            {
+              "const": "DELIVER_STAFF"
+            },
+            {
+              "const": "LoRA-B"
+            },
+            {
+              "const": "DELIVER_FRONT"
+            }
+          ]
+        }
+      },
+      "required": [
+        "phase",
+        "step"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

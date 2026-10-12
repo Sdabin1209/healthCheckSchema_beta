@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "types/Decision.json",
+  "$ref": "#/$defs/Decision",
+  "$defs": {
+    "Decision": {
+      "oneOf": [
+        {
+          "const": "RESUME"
+        },
+        {
+          "const": "END"
+        }
+      ]
+    }
+  }
+}

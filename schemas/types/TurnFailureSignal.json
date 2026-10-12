@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "types/TurnFailureSignal.json",
+  "$ref": "#/$defs/TurnFailureSignal",
+  "$defs": {
+    "SessionId": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9가-힣_.\\-]{1,64}$"
+    },
+    "TurnFailureSignal": {
+      "type": "object",
+      "properties": {
+        "session_id": {
+          "$ref": "#/$defs/SessionId"
+        },
+        "write_committed": {
+          "oneOf": [
+            {
+              "const": "COMMITTED"
+            },
+            {
+              "const": "NOT_COMMITTED"
+            }
+          ]
+        },
+        "staff_alert": {
+          "oneOf": [
+            {
+              "const": "NONE"
+            },
+            {
+              "const": "DELIVERED"
+            },
+            {
+              "const": "DELIVERY_FAILED"
+            }
+          ]
+        }
+      },
+      "required": [
+        "session_id",
+        "write_committed",
+        "staff_alert"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

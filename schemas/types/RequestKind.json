@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "types/RequestKind.json",
+  "$ref": "#/$defs/RequestKind",
+  "$defs": {
+    "RequestKind": {
+      "oneOf": [
+        {
+          "const": "REPEAT"
+        },
+        {
+          "const": "WAIT"
+        },
+        {
+          "const": "LATER"
+        },
+        {
+          "const": "STOP"
+        },
+        {
+          "const": "GUIDE"
+        },
+        {
+          "const": "STAFF_REQUEST"
+        }
+      ]
+    }
+  }
+}

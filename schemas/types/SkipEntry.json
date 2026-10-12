@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "types/SkipEntry.json",
+  "$ref": "#/$defs/SkipEntry",
+  "$defs": {
+    "QuestionId": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9가-힣_.\\-]{1,64}$"
+    },
+    "SkipEntry": {
+      "type": "object",
+      "properties": {
+        "question_id": {
+          "$ref": "#/$defs/QuestionId"
+        },
+        "reason": {
+          "$ref": "#/$defs/SkipReason"
+        }
+      },
+      "required": [
+        "question_id",
+        "reason"
+      ],
+      "additionalProperties": false
+    },
+    "SkipReason": {
+      "oneOf": [
+        {
+          "const": "UNKNOWN_ACCEPTED"
+        },
+        {
+          "const": "REFUSAL_ACCEPTED"
+        },
+        {
+          "const": "ATTEMPTS_EXCEEDED"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "types/Intent.json",
+  "$ref": "#/$defs/Intent",
+  "$defs": {
+    "Intent": {
+      "oneOf": [
+        {
+          "const": "ANSWERED_INTENT"
+        },
+        {
+          "const": "CORRECTION_MARKED"
+        },
+        {
+          "const": "CONFIRM_YES"
+        },
+        {
+          "const": "CONFIRM_NO"
+        },
+        {
+          "const": "SAYS_UNKNOWN"
+        },
+        {
+          "const": "SAYS_REFUSAL"
+        },
+        {
+          "const": "PROGRESS_OP"
+        },
+        {
+          "const": "GUIDE_REQUEST"
+        },
+        {
+          "const": "USER_CALLED_STAFF"
+        },
+        {
+          "const": "OUT_OF_SCOPE"
+        },
+        {
+          "const": "UNRECOGNIZED"
+        },
+        {
+          "const": "RISK_SIGNAL"
+        }
+      ]
+    }
+  }
+}

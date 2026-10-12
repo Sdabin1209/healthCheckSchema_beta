@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "types/Reason.json",
+  "$ref": "#/$defs/Reason",
+  "$defs": {
+    "Reason": {
+      "oneOf": [
+        {
+          "const": "NO_UNIT"
+        },
+        {
+          "const": "OUT_OF_RANGE"
+        },
+        {
+          "const": "AMBIGUOUS"
+        },
+        {
+          "const": "MISMATCH"
+        },
+        {
+          "const": "UNRECOGNIZED"
+        },
+        {
+          "const": "MISSING_SLOT"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "types/Problem.json",
+  "$ref": "#/$defs/Problem",
+  "$defs": {
+    "Problem": {
+      "oneOf": [
+        {
+          "const": "NO_UNIT"
+        },
+        {
+          "const": "OUT_OF_RANGE"
+        },
+        {
+          "const": "AMBIGUOUS"
+        },
+        {
+          "const": "MISMATCH"
+        },
+        {
+          "const": "UNKNOWN_TARGET"
+        }
+      ]
+    }
+  }
+}

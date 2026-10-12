@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "types/FixedSentence.json",
+  "$ref": "#/$defs/FixedSentence",
+  "$defs": {
+    "FixedSentence": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/$defs/FixedSentenceKey"
+        },
+        "sentence": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        }
+      },
+      "required": [
+        "key",
+        "sentence"
+      ],
+      "additionalProperties": false
+    },
+    "FixedSentenceKey": {
+      "oneOf": [
+        {
+          "const": "ASK_REPEAT"
+        },
+        {
+          "const": "OOS_NOTICE"
+        },
+        {
+          "const": "CALL_STAFF"
+        },
+        {
+          "const": "FAREWELL"
+        },
+        {
+          "const": "ASK_CONFIRM"
+        },
+        {
+          "const": "ASK_CORRECTION_TARGET"
+        },
+        {
+          "const": "ASK_FINISH"
+        },
+        {
+          "const": "RISK_NOTICE"
+        },
+        {
+          "const": "RESUME"
+        },
+        {
+          "const": "SURVEY_STOPPED"
+        },
+        {
+          "const": "WAIT_NOTICE"
+        },
+        {
+          "const": "ASK_STOP"
+        },
+        {
+          "const": "STAFF_NOTICE"
+        },
+        {
+          "const": "DEFERRED"
+        }
+      ]
+    }
+  }
+}

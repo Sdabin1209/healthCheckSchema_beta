@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "types/SkipReason.json",
+  "$ref": "#/$defs/SkipReason",
+  "$defs": {
+    "SkipReason": {
+      "oneOf": [
+        {
+          "const": "UNKNOWN_ACCEPTED"
+        },
+        {
+          "const": "REFUSAL_ACCEPTED"
+        },
+        {
+          "const": "ATTEMPTS_EXCEEDED"
+        }
+      ]
+    }
+  }
+}

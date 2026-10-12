@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "types/FillValue.json",
+  "$ref": "#/$defs/FillValue",
+  "$defs": {
+    "FillValue": {
+      "oneOf": [
+        {
+          "const": "REMAINING_COUNT"
+        }
+      ]
+    }
+  }
+}

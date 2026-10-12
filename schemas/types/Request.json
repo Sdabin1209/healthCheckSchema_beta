@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "types/Request.json",
+  "$ref": "#/$defs/Request",
+  "$defs": {
+    "QuestionId": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9가-힣_.\\-]{1,64}$"
+    },
+    "Request": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "$ref": "#/$defs/RequestKind"
+        },
+        "guide_id": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9가-힣_.\\-]{1,64}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "target_question_id": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/QuestionId"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "source_text": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SourceText"
+          },
+          "minItems": 1,
+          "maxItems": 20
+        }
+      },
+      "required": [
+        "kind",
+        "guide_id",
+        "target_question_id",
+        "source_text"
+      ],
+      "additionalProperties": false
+    },
+    "RequestKind": {
+      "oneOf": [
+        {
+          "const": "REPEAT"
+        },
+        {
+          "const": "WAIT"
+        },
+        {
+          "const": "LATER"
+        },
+        {
+          "const": "STOP"
+        },
+        {
+          "const": "GUIDE"
+        },
+        {
+          "const": "STAFF_REQUEST"
+        }
+      ]
+    },
+    "SourceText": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2000
+    }
+  }
+}

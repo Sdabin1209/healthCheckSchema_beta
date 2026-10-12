@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "types/AskSubject.json",
+  "$ref": "#/$defs/AskSubject",
+  "$defs": {
+    "AskSubject": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/Target"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "untargeted": {
+              "oneOf": [
+                {
+                  "const": "ASK_FINISH"
+                },
+                {
+                  "const": "ASK_STOP"
+                },
+                {
+                  "const": "ASK_CORRECTION_TARGET"
+                }
+              ]
+            }
+          },
+          "required": [
+            "untargeted"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "QuestionId": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9가-힣_.\\-]{1,64}$"
+    },
+    "SlotRef": {
+      "type": "object",
+      "properties": {
+        "question_id": {
+          "$ref": "#/$defs/QuestionId"
+        },
+        "repeat_key": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9가-힣_.\\-]{0,64}$"
+        },
+        "slot_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9가-힣_.\\-]{1,64}$"
+        }
+      },
+      "required": [
+        "question_id",
+        "repeat_key",
+        "slot_id"
+      ],
+      "additionalProperties": false
+    },
+    "Target": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/SlotRef"
+        },
+        {
+          "$ref": "#/$defs/WholeQuestion"
+        }
+      ]
+    },
+    "WholeQuestion": {
+      "type": "object",
+      "properties": {
+        "question_id": {
+          "$ref": "#/$defs/QuestionId"
+        },
+        "whole_question": {
+          "const": true
+        }
+      },
+      "required": [
+        "question_id",
+        "whole_question"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

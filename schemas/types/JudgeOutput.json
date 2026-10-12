@@ -1,0 +1,454 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "types/JudgeOutput.json",
+  "$ref": "#/$defs/JudgeOutput",
+  "$defs": {
+    "JudgeOutput": {
+      "type": "object",
+      "properties": {
+        "judgments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Judgment"
+          },
+          "maxItems": 50
+        },
+        "invalidated_questions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/QuestionId"
+          },
+          "maxItems": 50,
+          "uniqueItems": true
+        },
+        "utterance_judgment": {
+          "$ref": "#/$defs/UtteranceJudgment"
+        }
+      },
+      "required": [
+        "judgments",
+        "invalidated_questions",
+        "utterance_judgment"
+      ],
+      "additionalProperties": false
+    },
+    "Judgment": {
+      "type": "object",
+      "properties": {
+        "target": {
+          "$ref": "#/$defs/Target"
+        },
+        "status": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/JudgmentStatus"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "reasons": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Reason"
+          },
+          "maxItems": 6,
+          "uniqueItems": true
+        },
+        "value_now": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Value"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "said_value": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 2000
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "pending_handling": {
+          "oneOf": [
+            {
+              "const": "CREATE"
+            },
+            {
+              "const": "ACCEPT"
+            },
+            {
+              "const": "DROP"
+            },
+            {
+              "const": "NONE"
+            }
+          ]
+        },
+        "target_pending_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/PendingId"
+          },
+          "maxItems": 20
+        },
+        "mismatched_slots": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SlotRef"
+          },
+          "maxItems": 20
+        },
+        "risk_rule": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/RiskResponse"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "target",
+        "status",
+        "reasons",
+        "value_now",
+        "said_value",
+        "pending_handling",
+        "target_pending_ids",
+        "mismatched_slots",
+        "risk_rule"
+      ],
+      "additionalProperties": false
+    },
+    "JudgmentStatus": {
+      "oneOf": [
+        {
+          "const": "ANSWERED"
+        },
+        {
+          "const": "MISSING"
+        },
+        {
+          "const": "UNCLEAR"
+        },
+        {
+          "const": "CONFLICT"
+        },
+        {
+          "const": "CORRECTION"
+        },
+        {
+          "const": "UNKNOWN"
+        },
+        {
+          "const": "REJECTED"
+        },
+        {
+          "const": "PREREQUISITE_UNMET"
+        }
+      ]
+    },
+    "PendingId": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9가-힣_.\\-]{1,64}$"
+    },
+    "QuestionId": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9가-힣_.\\-]{1,64}$"
+    },
+    "Reason": {
+      "oneOf": [
+        {
+          "const": "NO_UNIT"
+        },
+        {
+          "const": "OUT_OF_RANGE"
+        },
+        {
+          "const": "AMBIGUOUS"
+        },
+        {
+          "const": "MISMATCH"
+        },
+        {
+          "const": "UNRECOGNIZED"
+        },
+        {
+          "const": "MISSING_SLOT"
+        }
+      ]
+    },
+    "Request": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "$ref": "#/$defs/RequestKind"
+        },
+        "guide_id": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9가-힣_.\\-]{1,64}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "target_question_id": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/QuestionId"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "source_text": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SourceText"
+          },
+          "minItems": 1,
+          "maxItems": 20
+        }
+      },
+      "required": [
+        "kind",
+        "guide_id",
+        "target_question_id",
+        "source_text"
+      ],
+      "additionalProperties": false
+    },
+    "RequestKind": {
+      "oneOf": [
+        {
+          "const": "REPEAT"
+        },
+        {
+          "const": "WAIT"
+        },
+        {
+          "const": "LATER"
+        },
+        {
+          "const": "STOP"
+        },
+        {
+          "const": "GUIDE"
+        },
+        {
+          "const": "STAFF_REQUEST"
+        }
+      ]
+    },
+    "RiskResponse": {
+      "oneOf": [
+        {
+          "const": "IMMEDIATE"
+        },
+        {
+          "const": "ON_RESULT"
+        }
+      ]
+    },
+    "SlotRef": {
+      "type": "object",
+      "properties": {
+        "question_id": {
+          "$ref": "#/$defs/QuestionId"
+        },
+        "repeat_key": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9가-힣_.\\-]{0,64}$"
+        },
+        "slot_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9가-힣_.\\-]{1,64}$"
+        }
+      },
+      "required": [
+        "question_id",
+        "repeat_key",
+        "slot_id"
+      ],
+      "additionalProperties": false
+    },
+    "SourceText": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2000
+    },
+    "Target": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/SlotRef"
+        },
+        {
+          "$ref": "#/$defs/WholeQuestion"
+        }
+      ]
+    },
+    "UtteranceJudgment": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "$ref": "#/$defs/UtteranceResult"
+        },
+        "valueless_correction_requests": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ValuelessCorrection"
+          },
+          "maxItems": 20
+        },
+        "confirmation": {
+          "oneOf": [
+            {
+              "const": "YES"
+            },
+            {
+              "const": "NO"
+            },
+            {
+              "const": "NONE"
+            }
+          ]
+        },
+        "requests": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Request"
+          },
+          "maxItems": 20
+        },
+        "risk_signal": {
+          "anyOf": [
+            {
+              "type": "object",
+              "properties": {
+                "evidence": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/$defs/SourceText"
+                  },
+                  "minItems": 1,
+                  "maxItems": 20
+                }
+              },
+              "required": [
+                "evidence"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "result",
+        "valueless_correction_requests",
+        "confirmation",
+        "requests",
+        "risk_signal"
+      ],
+      "additionalProperties": false
+    },
+    "UtteranceResult": {
+      "oneOf": [
+        {
+          "const": "HAS_ANSWER"
+        },
+        {
+          "const": "REQUEST_ONLY"
+        },
+        {
+          "const": "OUT_OF_SCOPE_ONLY"
+        },
+        {
+          "const": "UNRECOGNIZED_TURN"
+        }
+      ]
+    },
+    "Value": {
+      "oneOf": [
+        {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        {
+          "type": "object",
+          "properties": {
+            "amount": {
+              "type": "number",
+              "minimum": -100000,
+              "maximum": 100000
+            },
+            "unit": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 2000
+            }
+          },
+          "required": [
+            "amount",
+            "unit"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "ValuelessCorrection": {
+      "type": "object",
+      "properties": {
+        "target": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Target"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "target"
+      ],
+      "additionalProperties": false
+    },
+    "WholeQuestion": {
+      "type": "object",
+      "properties": {
+        "question_id": {
+          "$ref": "#/$defs/QuestionId"
+        },
+        "whole_question": {
+          "const": true
+        }
+      },
+      "required": [
+        "question_id",
+        "whole_question"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

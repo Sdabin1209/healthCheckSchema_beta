@@ -1,0 +1,925 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "types/ProgressRecordUpdate.json",
+  "$ref": "#/$defs/ProgressRecordUpdate",
+  "$defs": {
+    "Action": {
+      "oneOf": [
+        {
+          "const": "ASK_NEXT"
+        },
+        {
+          "const": "ASK_MISSING"
+        },
+        {
+          "const": "ASK_CLARIFY"
+        },
+        {
+          "const": "ASK_CONFIRM"
+        },
+        {
+          "const": "ASK_AFTER_UNKNOWN"
+        },
+        {
+          "const": "ASK_AFTER_REFUSAL"
+        },
+        {
+          "const": "ASK_CORRECTION_TARGET"
+        },
+        {
+          "const": "ASK_FINISH"
+        },
+        {
+          "const": "ASK_STOP"
+        },
+        {
+          "const": "ASK_REPEAT"
+        },
+        {
+          "const": "CALL_STAFF"
+        },
+        {
+          "const": "REDIRECT"
+        },
+        {
+          "const": "RISK_NOTICE"
+        },
+        {
+          "const": "WAIT_NOTICE"
+        },
+        {
+          "const": "STAFF_NOTICE"
+        },
+        {
+          "const": "FAREWELL"
+        }
+      ]
+    },
+    "AskAction": {
+      "oneOf": [
+        {
+          "const": "ASK_NEXT"
+        },
+        {
+          "const": "ASK_MISSING"
+        },
+        {
+          "const": "ASK_CLARIFY"
+        },
+        {
+          "const": "ASK_CONFIRM"
+        },
+        {
+          "const": "ASK_AFTER_UNKNOWN"
+        },
+        {
+          "const": "ASK_AFTER_REFUSAL"
+        },
+        {
+          "const": "ASK_CORRECTION_TARGET"
+        },
+        {
+          "const": "ASK_FINISH"
+        },
+        {
+          "const": "ASK_STOP"
+        }
+      ]
+    },
+    "AskDirective": {
+      "type": "object",
+      "properties": {
+        "action": {
+          "$ref": "#/$defs/AskAction"
+        },
+        "targets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Target"
+          },
+          "maxItems": 20
+        },
+        "target_pending_id": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/PendingId"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "say_values": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SayValue"
+          },
+          "maxItems": 20
+        }
+      },
+      "required": [
+        "action",
+        "targets",
+        "target_pending_id",
+        "say_values"
+      ],
+      "additionalProperties": false
+    },
+    "Directive": {
+      "type": "object",
+      "properties": {
+        "action": {
+          "$ref": "#/$defs/Action"
+        },
+        "targets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Target"
+          },
+          "maxItems": 20
+        },
+        "target_pending_id": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/PendingId"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "awaiting": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/AskDirective"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "say_values": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SayValue"
+          },
+          "maxItems": 20
+        },
+        "reask_reasons": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Reason"
+          },
+          "maxItems": 6,
+          "uniqueItems": true
+        },
+        "notices": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Notice"
+          },
+          "maxItems": 20
+        },
+        "sentence_materials": {
+          "$ref": "#/$defs/SentenceMaterials"
+        }
+      },
+      "required": [
+        "action",
+        "targets",
+        "target_pending_id",
+        "awaiting",
+        "say_values",
+        "reask_reasons",
+        "notices",
+        "sentence_materials"
+      ],
+      "additionalProperties": false
+    },
+    "FixedSentenceKey": {
+      "oneOf": [
+        {
+          "const": "ASK_REPEAT"
+        },
+        {
+          "const": "OOS_NOTICE"
+        },
+        {
+          "const": "CALL_STAFF"
+        },
+        {
+          "const": "FAREWELL"
+        },
+        {
+          "const": "ASK_CONFIRM"
+        },
+        {
+          "const": "ASK_CORRECTION_TARGET"
+        },
+        {
+          "const": "ASK_FINISH"
+        },
+        {
+          "const": "RISK_NOTICE"
+        },
+        {
+          "const": "RESUME"
+        },
+        {
+          "const": "SURVEY_STOPPED"
+        },
+        {
+          "const": "WAIT_NOTICE"
+        },
+        {
+          "const": "ASK_STOP"
+        },
+        {
+          "const": "STAFF_NOTICE"
+        },
+        {
+          "const": "DEFERRED"
+        }
+      ]
+    },
+    "Notice": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "$ref": "#/$defs/NoticeKind"
+        },
+        "guide_id": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9가-힣_.\\-]{1,64}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "question_id": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/QuestionId"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "question_name": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 2000
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "slot": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/SlotRef"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "previous_value": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Value"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "value": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Value"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "kind",
+        "guide_id",
+        "question_id",
+        "question_name",
+        "slot",
+        "previous_value",
+        "value"
+      ],
+      "additionalProperties": false
+    },
+    "NoticeKind": {
+      "oneOf": [
+        {
+          "const": "CORRECTION_ACK"
+        },
+        {
+          "const": "KEPT_PREVIOUS"
+        },
+        {
+          "const": "RESUME"
+        },
+        {
+          "const": "SURVEY_STOPPED"
+        },
+        {
+          "const": "GUIDE"
+        },
+        {
+          "const": "DEFERRED"
+        }
+      ]
+    },
+    "OpenRequests": {
+      "type": "object",
+      "properties": {
+        "correction_requests": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "target": {
+                "anyOf": [
+                  {
+                    "$ref": "#/$defs/Target"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "target"
+            ],
+            "additionalProperties": false
+          },
+          "maxItems": 20
+        },
+        "stop_requested": {
+          "type": "boolean"
+        },
+        "deferred": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "kind": {
+                "oneOf": [
+                  {
+                    "const": "QUESTION"
+                  },
+                  {
+                    "const": "PENDING"
+                  },
+                  {
+                    "const": "CORRECTION_REQUEST"
+                  }
+                ]
+              },
+              "target": {
+                "$ref": "#/$defs/Target"
+              }
+            },
+            "required": [
+              "kind",
+              "target"
+            ],
+            "additionalProperties": false
+          },
+          "maxItems": 50
+        }
+      },
+      "required": [
+        "correction_requests",
+        "stop_requested",
+        "deferred"
+      ],
+      "additionalProperties": false
+    },
+    "PauseEntry": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "$ref": "#/$defs/PauseKind"
+        },
+        "reasons": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/PauseReason"
+          },
+          "maxItems": 20
+        }
+      },
+      "required": [
+        "kind",
+        "reasons"
+      ],
+      "additionalProperties": false
+    },
+    "PauseKind": {
+      "oneOf": [
+        {
+          "const": "PAUSE"
+        },
+        {
+          "const": "RESUME"
+        }
+      ]
+    },
+    "PauseReason": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "RISK_SIGNAL"
+            },
+            "evidence": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/SourceText"
+              },
+              "minItems": 1,
+              "maxItems": 20
+            }
+          },
+          "required": [
+            "kind",
+            "evidence"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "RISK_RULE"
+            },
+            "target": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/SlotRef"
+              },
+              "minItems": 1,
+              "maxItems": 20
+            }
+          },
+          "required": [
+            "kind",
+            "target"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "PendingId": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9가-힣_.\\-]{1,64}$"
+    },
+    "ProgressRecordUpdate": {
+      "type": "object",
+      "properties": {
+        "last_directive": {
+          "$ref": "#/$defs/Directive"
+        },
+        "open_requests": {
+          "$ref": "#/$defs/OpenRequests"
+        },
+        "skipped_add": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SkipEntry"
+          },
+          "maxItems": 50
+        },
+        "skipped_remove": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/QuestionId"
+          },
+          "maxItems": 50,
+          "uniqueItems": true
+        },
+        "confirm_stopped_add": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SlotRef"
+          },
+          "maxItems": 50
+        },
+        "confirm_stopped_remove": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SlotRef"
+          },
+          "maxItems": 50
+        },
+        "session_status": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/SessionStatus"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "pause_history_add": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/PauseEntry"
+          },
+          "maxItems": 5
+        }
+      },
+      "required": [
+        "last_directive",
+        "open_requests",
+        "skipped_add",
+        "skipped_remove",
+        "confirm_stopped_add",
+        "confirm_stopped_remove",
+        "session_status",
+        "pause_history_add"
+      ],
+      "additionalProperties": false
+    },
+    "QuestionId": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9가-힣_.\\-]{1,64}$"
+    },
+    "Reason": {
+      "oneOf": [
+        {
+          "const": "NO_UNIT"
+        },
+        {
+          "const": "OUT_OF_RANGE"
+        },
+        {
+          "const": "AMBIGUOUS"
+        },
+        {
+          "const": "MISMATCH"
+        },
+        {
+          "const": "UNRECOGNIZED"
+        },
+        {
+          "const": "MISSING_SLOT"
+        }
+      ]
+    },
+    "SayValue": {
+      "type": "object",
+      "properties": {
+        "slot": {
+          "$ref": "#/$defs/SlotRef"
+        },
+        "question_name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "value": {
+          "$ref": "#/$defs/Value"
+        },
+        "role": {
+          "oneOf": [
+            {
+              "const": "CURRENT"
+            },
+            {
+              "const": "PENDING"
+            },
+            {
+              "const": "JUST_SAVED"
+            },
+            {
+              "const": "SAID"
+            }
+          ]
+        }
+      },
+      "required": [
+        "slot",
+        "question_name",
+        "value",
+        "role"
+      ],
+      "additionalProperties": false
+    },
+    "SentenceMaterials": {
+      "type": "object",
+      "properties": {
+        "question_sentences": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "question_id": {
+                "$ref": "#/$defs/QuestionId"
+              },
+              "sentence": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2000
+              }
+            },
+            "required": [
+              "question_id",
+              "sentence"
+            ],
+            "additionalProperties": false
+          },
+          "maxItems": 20
+        },
+        "refusal_explanations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "question_id": {
+                "$ref": "#/$defs/QuestionId"
+              },
+              "sentence": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2000
+              }
+            },
+            "required": [
+              "question_id",
+              "sentence"
+            ],
+            "additionalProperties": false
+          },
+          "maxItems": 20
+        },
+        "reask_sentences": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "slot": {
+                "$ref": "#/$defs/SlotRef"
+              },
+              "sentence": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2000
+              }
+            },
+            "required": [
+              "slot",
+              "sentence"
+            ],
+            "additionalProperties": false
+          },
+          "maxItems": 20
+        },
+        "choices": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "slot": {
+                "$ref": "#/$defs/SlotRef"
+              },
+              "choices": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 2000
+                },
+                "minItems": 1,
+                "maxItems": 30
+              }
+            },
+            "required": [
+              "slot",
+              "choices"
+            ],
+            "additionalProperties": false
+          },
+          "maxItems": 20
+        },
+        "guide_sentences": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "guide_id": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9가-힣_.\\-]{1,64}$"
+              },
+              "question_id": {
+                "anyOf": [
+                  {
+                    "$ref": "#/$defs/QuestionId"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "sentence": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2000
+              }
+            },
+            "required": [
+              "guide_id",
+              "question_id",
+              "sentence"
+            ],
+            "additionalProperties": false
+          },
+          "maxItems": 10
+        },
+        "fixed_sentences": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "key": {
+                "$ref": "#/$defs/FixedSentenceKey"
+              },
+              "sentence": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2000
+              }
+            },
+            "required": [
+              "key",
+              "sentence"
+            ],
+            "additionalProperties": false
+          },
+          "maxItems": 10
+        }
+      },
+      "required": [
+        "question_sentences",
+        "refusal_explanations",
+        "reask_sentences",
+        "choices",
+        "guide_sentences",
+        "fixed_sentences"
+      ],
+      "additionalProperties": false
+    },
+    "SessionStatus": {
+      "oneOf": [
+        {
+          "const": "IN_PROGRESS"
+        },
+        {
+          "const": "PAUSED_RISK"
+        },
+        {
+          "const": "ENDED_COMPLETE"
+        },
+        {
+          "const": "ENDED_STAFF"
+        },
+        {
+          "const": "ENDED_LEFT"
+        },
+        {
+          "const": "ENDED_USER_STOP"
+        }
+      ]
+    },
+    "SkipEntry": {
+      "type": "object",
+      "properties": {
+        "question_id": {
+          "$ref": "#/$defs/QuestionId"
+        },
+        "reason": {
+          "$ref": "#/$defs/SkipReason"
+        }
+      },
+      "required": [
+        "question_id",
+        "reason"
+      ],
+      "additionalProperties": false
+    },
+    "SkipReason": {
+      "oneOf": [
+        {
+          "const": "UNKNOWN_ACCEPTED"
+        },
+        {
+          "const": "REFUSAL_ACCEPTED"
+        },
+        {
+          "const": "ATTEMPTS_EXCEEDED"
+        }
+      ]
+    },
+    "SlotRef": {
+      "type": "object",
+      "properties": {
+        "question_id": {
+          "$ref": "#/$defs/QuestionId"
+        },
+        "repeat_key": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9가-힣_.\\-]{0,64}$"
+        },
+        "slot_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9가-힣_.\\-]{1,64}$"
+        }
+      },
+      "required": [
+        "question_id",
+        "repeat_key",
+        "slot_id"
+      ],
+      "additionalProperties": false
+    },
+    "SourceText": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2000
+    },
+    "Target": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/SlotRef"
+        },
+        {
+          "$ref": "#/$defs/WholeQuestion"
+        }
+      ]
+    },
+    "Value": {
+      "oneOf": [
+        {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        {
+          "type": "object",
+          "properties": {
+            "amount": {
+              "type": "number",
+              "minimum": -100000,
+              "maximum": 100000
+            },
+            "unit": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 2000
+            }
+          },
+          "required": [
+            "amount",
+            "unit"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "WholeQuestion": {
+      "type": "object",
+      "properties": {
+        "question_id": {
+          "$ref": "#/$defs/QuestionId"
+        },
+        "whole_question": {
+          "const": true
+        }
+      },
+      "required": [
+        "question_id",
+        "whole_question"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

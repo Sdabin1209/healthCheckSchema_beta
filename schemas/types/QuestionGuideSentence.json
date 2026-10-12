@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "types/QuestionGuideSentence.json",
+  "$ref": "#/$defs/QuestionGuideSentence",
+  "$defs": {
+    "QuestionGuideSentence": {
+      "type": "object",
+      "properties": {
+        "guide_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9가-힣_.\\-]{1,64}$"
+        },
+        "sentence": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        }
+      },
+      "required": [
+        "guide_id",
+        "sentence"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

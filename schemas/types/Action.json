@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "types/Action.json",
+  "$ref": "#/$defs/Action",
+  "$defs": {
+    "Action": {
+      "oneOf": [
+        {
+          "const": "ASK_NEXT"
+        },
+        {
+          "const": "ASK_MISSING"
+        },
+        {
+          "const": "ASK_CLARIFY"
+        },
+        {
+          "const": "ASK_CONFIRM"
+        },
+        {
+          "const": "ASK_AFTER_UNKNOWN"
+        },
+        {
+          "const": "ASK_AFTER_REFUSAL"
+        },
+        {
+          "const": "ASK_CORRECTION_TARGET"
+        },
+        {
+          "const": "ASK_FINISH"
+        },
+        {
+          "const": "ASK_STOP"
+        },
+        {
+          "const": "ASK_REPEAT"
+        },
+        {
+          "const": "CALL_STAFF"
+        },
+        {
+          "const": "REDIRECT"
+        },
+        {
+          "const": "RISK_NOTICE"
+        },
+        {
+          "const": "WAIT_NOTICE"
+        },
+        {
+          "const": "STAFF_NOTICE"
+        },
+        {
+          "const": "FAREWELL"
+        }
+      ]
+    }
+  }
+}
