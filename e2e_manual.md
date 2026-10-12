@@ -14,7 +14,9 @@
 schemas/                 JSON Schema 22개 (경계별, 자체 완결) + INDEX.md
   types/                 경계 스키마가 참조하는 공통 타입 95개 (타입별 파일) + INDEX.md
 tests/e2e/
-  run_e2e.py             검사기 (pip install jsonschema)
+  run_e2e.py             검사기
+  requirements.txt       검사기 의존성 (jsonschema)
+  requirements-tools.txt tools/ 의존성 (+PyYAML)
   scenarios/             시나리오 18개 (e2e_*.json) + index.json
   fixtures/question_bank.json   예시 문항 정의(Q1~Q8)
   tools/build_scenarios.py      스키마 프로젝트의 case_shapes에서 시나리오를 다시 만드는 스크립트
@@ -80,8 +82,8 @@ tests/e2e/
 ## 5. 실행
 
 ```sh
-pip install jsonschema
 cd tests/e2e
+pip install -r requirements.txt
 python3 run_e2e.py                              # scenarios/e2e_*.json 전부
 python3 run_e2e.py scenarios/e2e_01_normal.json  # 하나만
 python3 run_e2e.py --trace my_capture.json       # 실제 실행에서 저장한 트레이스(같은 형식)
