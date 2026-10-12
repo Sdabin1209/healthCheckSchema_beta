@@ -1,0 +1,184 @@
+[
+  {
+    "scenario_id": "e2e_01_normal",
+    "title": "정상 응답",
+    "category": "ANSWERED",
+    "timing": "발화",
+    "turns": 1,
+    "source_cases": [
+      "B1"
+    ]
+  },
+  {
+    "scenario_id": "e2e_02_missing",
+    "title": "정보 누락",
+    "category": "MISSING",
+    "timing": "발화",
+    "turns": 1,
+    "source_cases": [
+      "B2"
+    ]
+  },
+  {
+    "scenario_id": "e2e_03_unclear",
+    "title": "애매한 응답",
+    "category": "UNCLEAR",
+    "timing": "발화",
+    "turns": 1,
+    "source_cases": [
+      "B3a"
+    ]
+  },
+  {
+    "scenario_id": "e2e_04_correction",
+    "title": "정정",
+    "category": "CORRECTION",
+    "timing": "발화",
+    "turns": 1,
+    "source_cases": [
+      "C1"
+    ]
+  },
+  {
+    "scenario_id": "e2e_05_conflict",
+    "title": "충돌",
+    "category": "CONFLICT",
+    "timing": "발화",
+    "turns": 1,
+    "source_cases": [
+      "C3"
+    ]
+  },
+  {
+    "scenario_id": "e2e_06_unknown",
+    "title": "모름",
+    "category": "UNKNOWN",
+    "timing": "발화",
+    "turns": 1,
+    "source_cases": [
+      "B7a"
+    ]
+  },
+  {
+    "scenario_id": "e2e_07_refusal",
+    "title": "거절",
+    "category": "REJECTED",
+    "timing": "발화",
+    "turns": 1,
+    "source_cases": [
+      "B8a"
+    ]
+  },
+  {
+    "scenario_id": "e2e_08_oos",
+    "title": "문진 무관(OOS)",
+    "category": "OOS",
+    "timing": "발화",
+    "turns": 1,
+    "source_cases": [
+      "K1"
+    ]
+  },
+  {
+    "scenario_id": "e2e_09_complete",
+    "title": "문진 완료",
+    "category": "COMPLETE",
+    "timing": "발화",
+    "turns": 2,
+    "source_cases": [
+      "H1",
+      "H2"
+    ]
+  },
+  {
+    "scenario_id": "e2e_10_session_start",
+    "title": "대화 시작",
+    "category": "SESSION_START",
+    "timing": "대화 시작",
+    "turns": 1,
+    "source_cases": [
+      "A1"
+    ]
+  },
+  {
+    "scenario_id": "e2e_11_reconnect",
+    "title": "재접속",
+    "category": "SESSION_START",
+    "timing": "대화 시작",
+    "turns": 1,
+    "source_cases": [
+      "A3"
+    ]
+  },
+  {
+    "scenario_id": "e2e_12_first_utterance",
+    "title": "시작 신호 없이 첫 발화",
+    "category": "UTTERANCE",
+    "timing": "대화 시작",
+    "turns": 1,
+    "source_cases": [
+      "A2"
+    ]
+  },
+  {
+    "scenario_id": "e2e_13_risk_resume",
+    "title": "위험 신호 → 일시 중지 → 직원 재개",
+    "category": "RISK",
+    "timing": "위험·개입",
+    "turns": 2,
+    "source_cases": [
+      "G1",
+      "G6a"
+    ]
+  },
+  {
+    "scenario_id": "e2e_14_paused_ignored",
+    "title": "멈춘 동안의 발화",
+    "category": "IGNORED",
+    "timing": "위험·개입",
+    "turns": 1,
+    "source_cases": [
+      "G5"
+    ]
+  },
+  {
+    "scenario_id": "e2e_15_staff_call",
+    "title": "직원 호출",
+    "category": "STAFF_REQUEST",
+    "timing": "위험·개입",
+    "turns": 1,
+    "source_cases": [
+      "F1"
+    ]
+  },
+  {
+    "scenario_id": "e2e_16_user_left",
+    "title": "이탈 종료",
+    "category": "END_LEFT",
+    "timing": "종료",
+    "turns": 1,
+    "source_cases": [
+      "A4a"
+    ]
+  },
+  {
+    "scenario_id": "e2e_17_staff_end",
+    "title": "직원이 문진 종료",
+    "category": "INTERVENTION_END",
+    "timing": "종료",
+    "turns": 1,
+    "source_cases": [
+      "F4"
+    ]
+  },
+  {
+    "scenario_id": "e2e_18_ended_ignored",
+    "title": "끝난 세션에 발화",
+    "category": "IGNORED",
+    "timing": "종료",
+    "turns": 1,
+    "source_cases": [
+      "A5"
+    ]
+  }
+]

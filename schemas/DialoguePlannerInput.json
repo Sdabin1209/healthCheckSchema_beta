@@ -1,0 +1,2046 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "standalone/DialoguePlannerInput.json",
+  "$ref": "#/$defs/DialoguePlannerInput",
+  "$defs": {
+    "Action": {
+      "oneOf": [
+        {
+          "const": "ASK_NEXT"
+        },
+        {
+          "const": "ASK_MISSING"
+        },
+        {
+          "const": "ASK_CLARIFY"
+        },
+        {
+          "const": "ASK_CONFIRM"
+        },
+        {
+          "const": "ASK_AFTER_UNKNOWN"
+        },
+        {
+          "const": "ASK_AFTER_REFUSAL"
+        },
+        {
+          "const": "ASK_CORRECTION_TARGET"
+        },
+        {
+          "const": "ASK_FINISH"
+        },
+        {
+          "const": "ASK_STOP"
+        },
+        {
+          "const": "ASK_REPEAT"
+        },
+        {
+          "const": "CALL_STAFF"
+        },
+        {
+          "const": "REDIRECT"
+        },
+        {
+          "const": "RISK_NOTICE"
+        },
+        {
+          "const": "WAIT_NOTICE"
+        },
+        {
+          "const": "STAFF_NOTICE"
+        },
+        {
+          "const": "FAREWELL"
+        }
+      ]
+    },
+    "AskAction": {
+      "oneOf": [
+        {
+          "const": "ASK_NEXT"
+        },
+        {
+          "const": "ASK_MISSING"
+        },
+        {
+          "const": "ASK_CLARIFY"
+        },
+        {
+          "const": "ASK_CONFIRM"
+        },
+        {
+          "const": "ASK_AFTER_UNKNOWN"
+        },
+        {
+          "const": "ASK_AFTER_REFUSAL"
+        },
+        {
+          "const": "ASK_CORRECTION_TARGET"
+        },
+        {
+          "const": "ASK_FINISH"
+        },
+        {
+          "const": "ASK_STOP"
+        }
+      ]
+    },
+    "AskDirective": {
+      "type": "object",
+      "properties": {
+        "action": {
+          "$ref": "#/$defs/AskAction"
+        },
+        "targets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Target"
+          },
+          "maxItems": 20
+        },
+        "target_pending_id": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/PendingId"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "say_values": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SayValue"
+          },
+          "maxItems": 20
+        }
+      },
+      "required": [
+        "action",
+        "targets",
+        "target_pending_id",
+        "say_values"
+      ],
+      "additionalProperties": false
+    },
+    "AskSubject": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/Target"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "untargeted": {
+              "oneOf": [
+                {
+                  "const": "ASK_FINISH"
+                },
+                {
+                  "const": "ASK_STOP"
+                },
+                {
+                  "const": "ASK_CORRECTION_TARGET"
+                }
+              ]
+            }
+          },
+          "required": [
+            "untargeted"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "ChangedSlot": {
+      "type": "object",
+      "properties": {
+        "slot": {
+          "$ref": "#/$defs/SlotRef"
+        },
+        "previous_value": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Value"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "new_value": {
+          "$ref": "#/$defs/Value"
+        },
+        "kind": {
+          "oneOf": [
+            {
+              "const": "FIRST_ANSWER"
+            },
+            {
+              "const": "CORRECTION"
+            }
+          ]
+        }
+      },
+      "required": [
+        "slot",
+        "previous_value",
+        "new_value",
+        "kind"
+      ],
+      "additionalProperties": false
+    },
+    "CurrentValue": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "answer": {
+              "$ref": "#/$defs/Value"
+            }
+          },
+          "required": [
+            "answer"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "const": "UNKNOWN_RECORD"
+        },
+        {
+          "const": "REFUSAL_RECORD"
+        },
+        {
+          "const": "NONE"
+        }
+      ]
+    },
+    "DialoguePlannerInput": {
+      "type": "object",
+      "properties": {
+        "turn_kind": {
+          "$ref": "#/$defs/TurnKind"
+        },
+        "utterance_judgment": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/UtteranceJudgment"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "judgments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Judgment"
+          },
+          "maxItems": 50
+        },
+        "store_summary": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/StoreSummary"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "answer_records": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SlotRecord"
+          },
+          "maxItems": 1000
+        },
+        "last_directive": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Directive"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "skipped": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SkipEntry"
+          },
+          "maxItems": 200
+        },
+        "confirm_stopped": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SlotRef"
+          },
+          "maxItems": 200
+        },
+        "open_requests": {
+          "$ref": "#/$defs/OpenRequests"
+        },
+        "planner_record": {
+          "$ref": "#/$defs/PlannerRecord"
+        },
+        "question_bank": {
+          "$ref": "#/$defs/QuestionBank"
+        }
+      },
+      "required": [
+        "turn_kind",
+        "utterance_judgment",
+        "judgments",
+        "store_summary",
+        "answer_records",
+        "last_directive",
+        "skipped",
+        "confirm_stopped",
+        "open_requests",
+        "planner_record",
+        "question_bank"
+      ],
+      "additionalProperties": false
+    },
+    "Directive": {
+      "type": "object",
+      "properties": {
+        "action": {
+          "$ref": "#/$defs/Action"
+        },
+        "targets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Target"
+          },
+          "maxItems": 20
+        },
+        "target_pending_id": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/PendingId"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "awaiting": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/AskDirective"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "say_values": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SayValue"
+          },
+          "maxItems": 20
+        },
+        "reask_reasons": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Reason"
+          },
+          "maxItems": 6,
+          "uniqueItems": true
+        },
+        "notices": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Notice"
+          },
+          "maxItems": 20
+        },
+        "sentence_materials": {
+          "$ref": "#/$defs/SentenceMaterials"
+        }
+      },
+      "required": [
+        "action",
+        "targets",
+        "target_pending_id",
+        "awaiting",
+        "say_values",
+        "reask_reasons",
+        "notices",
+        "sentence_materials"
+      ],
+      "additionalProperties": false
+    },
+    "FillValue": {
+      "oneOf": [
+        {
+          "const": "REMAINING_COUNT"
+        }
+      ]
+    },
+    "FixedSentence": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/$defs/FixedSentenceKey"
+        },
+        "sentence": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        }
+      },
+      "required": [
+        "key",
+        "sentence"
+      ],
+      "additionalProperties": false
+    },
+    "FixedSentenceKey": {
+      "oneOf": [
+        {
+          "const": "ASK_REPEAT"
+        },
+        {
+          "const": "OOS_NOTICE"
+        },
+        {
+          "const": "CALL_STAFF"
+        },
+        {
+          "const": "FAREWELL"
+        },
+        {
+          "const": "ASK_CONFIRM"
+        },
+        {
+          "const": "ASK_CORRECTION_TARGET"
+        },
+        {
+          "const": "ASK_FINISH"
+        },
+        {
+          "const": "RISK_NOTICE"
+        },
+        {
+          "const": "RESUME"
+        },
+        {
+          "const": "SURVEY_STOPPED"
+        },
+        {
+          "const": "WAIT_NOTICE"
+        },
+        {
+          "const": "ASK_STOP"
+        },
+        {
+          "const": "STAFF_NOTICE"
+        },
+        {
+          "const": "DEFERRED"
+        }
+      ]
+    },
+    "GuideItem": {
+      "type": "object",
+      "properties": {
+        "guide_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9가-힣_.\\-]{1,64}$"
+        },
+        "selection_criterion": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "per_question": {
+          "type": "boolean"
+        },
+        "sentence": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 2000
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "fill_value": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/FillValue"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "guide_id",
+        "selection_criterion",
+        "per_question",
+        "sentence",
+        "fill_value"
+      ],
+      "additionalProperties": false
+    },
+    "Judgment": {
+      "type": "object",
+      "properties": {
+        "target": {
+          "$ref": "#/$defs/Target"
+        },
+        "status": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/JudgmentStatus"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "reasons": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Reason"
+          },
+          "maxItems": 6,
+          "uniqueItems": true
+        },
+        "value_now": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Value"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "said_value": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 2000
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "pending_handling": {
+          "oneOf": [
+            {
+              "const": "CREATE"
+            },
+            {
+              "const": "ACCEPT"
+            },
+            {
+              "const": "DROP"
+            },
+            {
+              "const": "NONE"
+            }
+          ]
+        },
+        "target_pending_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/PendingId"
+          },
+          "maxItems": 20
+        },
+        "mismatched_slots": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SlotRef"
+          },
+          "maxItems": 20
+        },
+        "risk_rule": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/RiskResponse"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "target",
+        "status",
+        "reasons",
+        "value_now",
+        "said_value",
+        "pending_handling",
+        "target_pending_ids",
+        "mismatched_slots",
+        "risk_rule"
+      ],
+      "additionalProperties": false
+    },
+    "JudgmentStatus": {
+      "oneOf": [
+        {
+          "const": "ANSWERED"
+        },
+        {
+          "const": "MISSING"
+        },
+        {
+          "const": "UNCLEAR"
+        },
+        {
+          "const": "CONFLICT"
+        },
+        {
+          "const": "CORRECTION"
+        },
+        {
+          "const": "UNKNOWN"
+        },
+        {
+          "const": "REJECTED"
+        },
+        {
+          "const": "PREREQUISITE_UNMET"
+        }
+      ]
+    },
+    "Notice": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "$ref": "#/$defs/NoticeKind"
+        },
+        "guide_id": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9가-힣_.\\-]{1,64}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "question_id": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/QuestionId"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "question_name": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 2000
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "slot": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/SlotRef"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "previous_value": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Value"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "value": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Value"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "kind",
+        "guide_id",
+        "question_id",
+        "question_name",
+        "slot",
+        "previous_value",
+        "value"
+      ],
+      "additionalProperties": false
+    },
+    "NoticeKind": {
+      "oneOf": [
+        {
+          "const": "CORRECTION_ACK"
+        },
+        {
+          "const": "KEPT_PREVIOUS"
+        },
+        {
+          "const": "RESUME"
+        },
+        {
+          "const": "SURVEY_STOPPED"
+        },
+        {
+          "const": "GUIDE"
+        },
+        {
+          "const": "DEFERRED"
+        }
+      ]
+    },
+    "OpenRequests": {
+      "type": "object",
+      "properties": {
+        "correction_requests": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "target": {
+                "anyOf": [
+                  {
+                    "$ref": "#/$defs/Target"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "target"
+            ],
+            "additionalProperties": false
+          },
+          "maxItems": 20
+        },
+        "stop_requested": {
+          "type": "boolean"
+        },
+        "deferred": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "kind": {
+                "oneOf": [
+                  {
+                    "const": "QUESTION"
+                  },
+                  {
+                    "const": "PENDING"
+                  },
+                  {
+                    "const": "CORRECTION_REQUEST"
+                  }
+                ]
+              },
+              "target": {
+                "$ref": "#/$defs/Target"
+              }
+            },
+            "required": [
+              "kind",
+              "target"
+            ],
+            "additionalProperties": false
+          },
+          "maxItems": 50
+        }
+      },
+      "required": [
+        "correction_requests",
+        "stop_requested",
+        "deferred"
+      ],
+      "additionalProperties": false
+    },
+    "PendingId": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9가-힣_.\\-]{1,64}$"
+    },
+    "PendingRecord": {
+      "type": "object",
+      "properties": {
+        "pending_id": {
+          "$ref": "#/$defs/PendingId"
+        },
+        "value": {
+          "$ref": "#/$defs/Value"
+        },
+        "risk_mark": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/RiskResponse"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "pending_id",
+        "value",
+        "risk_mark"
+      ],
+      "additionalProperties": false
+    },
+    "PlannerRecord": {
+      "type": "object",
+      "properties": {
+        "attempt_counts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "question_id": {
+                "$ref": "#/$defs/QuestionId"
+              },
+              "count": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 1000
+              }
+            },
+            "required": [
+              "question_id",
+              "count"
+            ],
+            "additionalProperties": false
+          },
+          "maxItems": 200
+        },
+        "confirm_counts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "slot": {
+                "$ref": "#/$defs/SlotRef"
+              },
+              "count": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 1000
+              }
+            },
+            "required": [
+              "slot",
+              "count"
+            ],
+            "additionalProperties": false
+          },
+          "maxItems": 200
+        },
+        "unknown_counts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "question_id": {
+                "$ref": "#/$defs/QuestionId"
+              },
+              "count": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 1000
+              }
+            },
+            "required": [
+              "question_id",
+              "count"
+            ],
+            "additionalProperties": false
+          },
+          "maxItems": 200
+        },
+        "refusal_counts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "question_id": {
+                "$ref": "#/$defs/QuestionId"
+              },
+              "count": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 1000
+              }
+            },
+            "required": [
+              "question_id",
+              "count"
+            ],
+            "additionalProperties": false
+          },
+          "maxItems": 200
+        },
+        "unrecognized_streak": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000
+        },
+        "ask_counts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "subject": {
+                "$ref": "#/$defs/AskSubject"
+              },
+              "count": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 1000
+              }
+            },
+            "required": [
+              "subject",
+              "count"
+            ],
+            "additionalProperties": false
+          },
+          "maxItems": 200
+        }
+      },
+      "required": [
+        "attempt_counts",
+        "confirm_counts",
+        "unknown_counts",
+        "refusal_counts",
+        "unrecognized_streak",
+        "ask_counts"
+      ],
+      "additionalProperties": false
+    },
+    "Policy": {
+      "type": "object",
+      "properties": {
+        "question_limit": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 20
+        },
+        "unknown_accept_after": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 20
+        },
+        "refusal_accept_after": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 20
+        }
+      },
+      "required": [
+        "question_limit",
+        "unknown_accept_after",
+        "refusal_accept_after"
+      ],
+      "additionalProperties": false
+    },
+    "Prerequisite": {
+      "type": "object",
+      "properties": {
+        "slot": {
+          "$ref": "#/$defs/SlotRef"
+        },
+        "value": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        }
+      },
+      "required": [
+        "slot",
+        "value"
+      ],
+      "additionalProperties": false
+    },
+    "QuestionBank": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000
+        },
+        "questions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/QuestionDef"
+          },
+          "minItems": 1,
+          "maxItems": 200
+        },
+        "session_settings": {
+          "$ref": "#/$defs/SessionSettings"
+        }
+      },
+      "required": [
+        "version",
+        "questions",
+        "session_settings"
+      ],
+      "additionalProperties": false
+    },
+    "QuestionDef": {
+      "type": "object",
+      "properties": {
+        "question_id": {
+          "$ref": "#/$defs/QuestionId"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "order": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000
+        },
+        "prerequisite": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Prerequisite"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "question_sentence": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "refusal_explanation": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "guide_sentences": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/QuestionGuideSentence"
+          },
+          "maxItems": 10
+        },
+        "affected_followups": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/QuestionId"
+          },
+          "maxItems": 50,
+          "uniqueItems": true
+        },
+        "policy": {
+          "$ref": "#/$defs/Policy"
+        },
+        "repeat_keys": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9가-힣_.\\-]{1,64}$"
+          },
+          "maxItems": 50,
+          "uniqueItems": true
+        },
+        "slots": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SlotDef"
+          },
+          "minItems": 1,
+          "maxItems": 20
+        }
+      },
+      "required": [
+        "question_id",
+        "name",
+        "order",
+        "prerequisite",
+        "question_sentence",
+        "refusal_explanation",
+        "guide_sentences",
+        "affected_followups",
+        "policy",
+        "repeat_keys",
+        "slots"
+      ],
+      "additionalProperties": false
+    },
+    "QuestionGuideSentence": {
+      "type": "object",
+      "properties": {
+        "guide_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9가-힣_.\\-]{1,64}$"
+        },
+        "sentence": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        }
+      },
+      "required": [
+        "guide_id",
+        "sentence"
+      ],
+      "additionalProperties": false
+    },
+    "QuestionId": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9가-힣_.\\-]{1,64}$"
+    },
+    "Reason": {
+      "oneOf": [
+        {
+          "const": "NO_UNIT"
+        },
+        {
+          "const": "OUT_OF_RANGE"
+        },
+        {
+          "const": "AMBIGUOUS"
+        },
+        {
+          "const": "MISMATCH"
+        },
+        {
+          "const": "UNRECOGNIZED"
+        },
+        {
+          "const": "MISSING_SLOT"
+        }
+      ]
+    },
+    "Request": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "$ref": "#/$defs/RequestKind"
+        },
+        "guide_id": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9가-힣_.\\-]{1,64}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "target_question_id": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/QuestionId"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "source_text": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SourceText"
+          },
+          "minItems": 1,
+          "maxItems": 20
+        }
+      },
+      "required": [
+        "kind",
+        "guide_id",
+        "target_question_id",
+        "source_text"
+      ],
+      "additionalProperties": false
+    },
+    "RequestKind": {
+      "oneOf": [
+        {
+          "const": "REPEAT"
+        },
+        {
+          "const": "WAIT"
+        },
+        {
+          "const": "LATER"
+        },
+        {
+          "const": "STOP"
+        },
+        {
+          "const": "GUIDE"
+        },
+        {
+          "const": "STAFF_REQUEST"
+        }
+      ]
+    },
+    "RiskResponse": {
+      "oneOf": [
+        {
+          "const": "IMMEDIATE"
+        },
+        {
+          "const": "ON_RESULT"
+        }
+      ]
+    },
+    "RiskRule": {
+      "type": "object",
+      "properties": {
+        "operator": {
+          "oneOf": [
+            {
+              "const": "="
+            },
+            {
+              "const": ">="
+            }
+          ]
+        },
+        "value": {
+          "$ref": "#/$defs/Value"
+        },
+        "response": {
+          "$ref": "#/$defs/RiskResponse"
+        }
+      },
+      "required": [
+        "operator",
+        "value",
+        "response"
+      ],
+      "additionalProperties": false
+    },
+    "SayValue": {
+      "type": "object",
+      "properties": {
+        "slot": {
+          "$ref": "#/$defs/SlotRef"
+        },
+        "question_name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "value": {
+          "$ref": "#/$defs/Value"
+        },
+        "role": {
+          "oneOf": [
+            {
+              "const": "CURRENT"
+            },
+            {
+              "const": "PENDING"
+            },
+            {
+              "const": "JUST_SAVED"
+            },
+            {
+              "const": "SAID"
+            }
+          ]
+        }
+      },
+      "required": [
+        "slot",
+        "question_name",
+        "value",
+        "role"
+      ],
+      "additionalProperties": false
+    },
+    "SentenceMaterials": {
+      "type": "object",
+      "properties": {
+        "question_sentences": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "question_id": {
+                "$ref": "#/$defs/QuestionId"
+              },
+              "sentence": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2000
+              }
+            },
+            "required": [
+              "question_id",
+              "sentence"
+            ],
+            "additionalProperties": false
+          },
+          "maxItems": 20
+        },
+        "refusal_explanations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "question_id": {
+                "$ref": "#/$defs/QuestionId"
+              },
+              "sentence": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2000
+              }
+            },
+            "required": [
+              "question_id",
+              "sentence"
+            ],
+            "additionalProperties": false
+          },
+          "maxItems": 20
+        },
+        "reask_sentences": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "slot": {
+                "$ref": "#/$defs/SlotRef"
+              },
+              "sentence": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2000
+              }
+            },
+            "required": [
+              "slot",
+              "sentence"
+            ],
+            "additionalProperties": false
+          },
+          "maxItems": 20
+        },
+        "choices": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "slot": {
+                "$ref": "#/$defs/SlotRef"
+              },
+              "choices": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 2000
+                },
+                "minItems": 1,
+                "maxItems": 30
+              }
+            },
+            "required": [
+              "slot",
+              "choices"
+            ],
+            "additionalProperties": false
+          },
+          "maxItems": 20
+        },
+        "guide_sentences": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "guide_id": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9가-힣_.\\-]{1,64}$"
+              },
+              "question_id": {
+                "anyOf": [
+                  {
+                    "$ref": "#/$defs/QuestionId"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "sentence": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2000
+              }
+            },
+            "required": [
+              "guide_id",
+              "question_id",
+              "sentence"
+            ],
+            "additionalProperties": false
+          },
+          "maxItems": 10
+        },
+        "fixed_sentences": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "key": {
+                "$ref": "#/$defs/FixedSentenceKey"
+              },
+              "sentence": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2000
+              }
+            },
+            "required": [
+              "key",
+              "sentence"
+            ],
+            "additionalProperties": false
+          },
+          "maxItems": 10
+        }
+      },
+      "required": [
+        "question_sentences",
+        "refusal_explanations",
+        "reask_sentences",
+        "choices",
+        "guide_sentences",
+        "fixed_sentences"
+      ],
+      "additionalProperties": false
+    },
+    "SessionSettings": {
+      "type": "object",
+      "properties": {
+        "risk_phrases": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          },
+          "maxItems": 200
+        },
+        "confirm_limit": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 20
+        },
+        "unrecognized_streak_limit": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 20
+        },
+        "ask_limit": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 20
+        },
+        "fixed_sentences": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/FixedSentence"
+          },
+          "maxItems": 20
+        },
+        "guide_list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/GuideItem"
+          },
+          "maxItems": 50
+        }
+      },
+      "required": [
+        "risk_phrases",
+        "confirm_limit",
+        "unrecognized_streak_limit",
+        "ask_limit",
+        "fixed_sentences",
+        "guide_list"
+      ],
+      "additionalProperties": false
+    },
+    "SkipEntry": {
+      "type": "object",
+      "properties": {
+        "question_id": {
+          "$ref": "#/$defs/QuestionId"
+        },
+        "reason": {
+          "$ref": "#/$defs/SkipReason"
+        }
+      },
+      "required": [
+        "question_id",
+        "reason"
+      ],
+      "additionalProperties": false
+    },
+    "SkipReason": {
+      "oneOf": [
+        {
+          "const": "UNKNOWN_ACCEPTED"
+        },
+        {
+          "const": "REFUSAL_ACCEPTED"
+        },
+        {
+          "const": "ATTEMPTS_EXCEEDED"
+        }
+      ]
+    },
+    "SlotDef": {
+      "type": "object",
+      "properties": {
+        "slot_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9가-힣_.\\-]{1,64}$"
+        },
+        "units": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/UnitDef"
+          },
+          "maxItems": 10
+        },
+        "choices": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          },
+          "maxItems": 30
+        },
+        "yes_no_map": {
+          "anyOf": [
+            {
+              "type": "object",
+              "properties": {
+                "yes": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 2000
+                },
+                "no": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 2000
+                }
+              },
+              "required": [
+                "yes",
+                "no"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "required": {
+          "type": "boolean"
+        },
+        "reask_sentence": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "risk_rule": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/RiskRule"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "slot_id",
+        "units",
+        "choices",
+        "yes_no_map",
+        "required",
+        "reask_sentence",
+        "risk_rule"
+      ],
+      "additionalProperties": false
+    },
+    "SlotRecord": {
+      "type": "object",
+      "properties": {
+        "slot": {
+          "$ref": "#/$defs/SlotRef"
+        },
+        "current_value": {
+          "$ref": "#/$defs/CurrentValue"
+        },
+        "risk_mark": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/RiskResponse"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "history": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Value"
+          },
+          "maxItems": 100
+        },
+        "pending": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/PendingRecord"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "slot",
+        "current_value",
+        "risk_mark",
+        "history",
+        "pending"
+      ],
+      "additionalProperties": false
+    },
+    "SlotRef": {
+      "type": "object",
+      "properties": {
+        "question_id": {
+          "$ref": "#/$defs/QuestionId"
+        },
+        "repeat_key": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9가-힣_.\\-]{0,64}$"
+        },
+        "slot_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9가-힣_.\\-]{1,64}$"
+        }
+      },
+      "required": [
+        "question_id",
+        "repeat_key",
+        "slot_id"
+      ],
+      "additionalProperties": false
+    },
+    "SourceText": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2000
+    },
+    "StoreSummary": {
+      "type": "object",
+      "properties": {
+        "changed_slots": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ChangedSlot"
+          },
+          "maxItems": 50
+        },
+        "unknown_refused_records": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "slot": {
+                "$ref": "#/$defs/SlotRef"
+              },
+              "record": {
+                "oneOf": [
+                  {
+                    "const": "UNKNOWN_RECORD"
+                  },
+                  {
+                    "const": "REFUSAL_RECORD"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "slot",
+              "record"
+            ],
+            "additionalProperties": false
+          },
+          "maxItems": 50
+        },
+        "created_pendings": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "slot": {
+                "$ref": "#/$defs/SlotRef"
+              }
+            },
+            "required": [
+              "slot"
+            ],
+            "additionalProperties": false
+          },
+          "maxItems": 50
+        },
+        "resolved_pendings": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "slot": {
+                "$ref": "#/$defs/SlotRef"
+              },
+              "handling": {
+                "oneOf": [
+                  {
+                    "const": "ACCEPT"
+                  },
+                  {
+                    "const": "DROP"
+                  },
+                  {
+                    "const": "REPLACE"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "slot",
+              "handling"
+            ],
+            "additionalProperties": false
+          },
+          "maxItems": 50
+        },
+        "invalidated_questions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/QuestionId"
+          },
+          "maxItems": 50,
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "changed_slots",
+        "unknown_refused_records",
+        "created_pendings",
+        "resolved_pendings",
+        "invalidated_questions"
+      ],
+      "additionalProperties": false
+    },
+    "Target": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/SlotRef"
+        },
+        {
+          "$ref": "#/$defs/WholeQuestion"
+        }
+      ]
+    },
+    "TurnKind": {
+      "oneOf": [
+        {
+          "const": "SESSION_START"
+        },
+        {
+          "const": "UTTERANCE"
+        },
+        {
+          "const": "RESUME"
+        },
+        {
+          "const": "INTERVENTION_END"
+        },
+        {
+          "const": "END_LEFT"
+        }
+      ]
+    },
+    "UnitDef": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "synonyms": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          },
+          "maxItems": 10
+        },
+        "range": {
+          "anyOf": [
+            {
+              "type": "array",
+              "items": {
+                "type": "number",
+                "minimum": -100000,
+                "maximum": 100000
+              },
+              "minItems": 2,
+              "maxItems": 2
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "convert_to": {
+          "anyOf": [
+            {
+              "type": "object",
+              "properties": {
+                "unit": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 2000
+                },
+                "factor": {
+                  "type": "number",
+                  "exclusiveMinimum": 0,
+                  "maximum": 100000
+                }
+              },
+              "required": [
+                "unit",
+                "factor"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "name",
+        "synonyms",
+        "range",
+        "convert_to"
+      ],
+      "additionalProperties": false
+    },
+    "UtteranceJudgment": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "$ref": "#/$defs/UtteranceResult"
+        },
+        "valueless_correction_requests": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ValuelessCorrection"
+          },
+          "maxItems": 20
+        },
+        "confirmation": {
+          "oneOf": [
+            {
+              "const": "YES"
+            },
+            {
+              "const": "NO"
+            },
+            {
+              "const": "NONE"
+            }
+          ]
+        },
+        "requests": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Request"
+          },
+          "maxItems": 20
+        },
+        "risk_signal": {
+          "anyOf": [
+            {
+              "type": "object",
+              "properties": {
+                "evidence": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/$defs/SourceText"
+                  },
+                  "minItems": 1,
+                  "maxItems": 20
+                }
+              },
+              "required": [
+                "evidence"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "result",
+        "valueless_correction_requests",
+        "confirmation",
+        "requests",
+        "risk_signal"
+      ],
+      "additionalProperties": false
+    },
+    "UtteranceResult": {
+      "oneOf": [
+        {
+          "const": "HAS_ANSWER"
+        },
+        {
+          "const": "REQUEST_ONLY"
+        },
+        {
+          "const": "OUT_OF_SCOPE_ONLY"
+        },
+        {
+          "const": "UNRECOGNIZED_TURN"
+        }
+      ]
+    },
+    "Value": {
+      "oneOf": [
+        {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        {
+          "type": "object",
+          "properties": {
+            "amount": {
+              "type": "number",
+              "minimum": -100000,
+              "maximum": 100000
+            },
+            "unit": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 2000
+            }
+          },
+          "required": [
+            "amount",
+            "unit"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "ValuelessCorrection": {
+      "type": "object",
+      "properties": {
+        "target": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Target"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "target"
+      ],
+      "additionalProperties": false
+    },
+    "WholeQuestion": {
+      "type": "object",
+      "properties": {
+        "question_id": {
+          "$ref": "#/$defs/QuestionId"
+        },
+        "whole_question": {
+          "const": true
+        }
+      },
+      "required": [
+        "question_id",
+        "whole_question"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

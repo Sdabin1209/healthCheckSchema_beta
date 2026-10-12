@@ -1,0 +1,3875 @@
+{
+  "scenario_id": "e2e_02_missing",
+  "title": "정보 누락",
+  "category": "MISSING",
+  "timing": "발화",
+  "description": "필수 슬롯 일부만 답함. 받은 값은 저장하고 빠진 슬롯만 되묻는다.",
+  "source_cases": [
+    "B2"
+  ],
+  "provenance": "정적 예시: 스키마 프로젝트의 case_shapes에서 가져와 저장 규칙(rules 9-2)대로 DB 상태를 재계산해 만들었다. 실제 컴포넌트 실행 결과가 아니다.",
+  "question_bank_ref": "../fixtures/question_bank.json",
+  "stage_labels": {
+    "input_message": "사용자 입력(프론트/직원 화면)",
+    "orchestrator_input": "LangGraph 입력",
+    "db_before": "DB 상태(턴 시작)",
+    "lora_a_input": "LoRA-A Input",
+    "lora_a_output": "LoRA-A Output",
+    "normalizer_input": "정규화·검증 Input",
+    "normalization_result": "Normalization Result",
+    "judge_input": "상태 판정 Input",
+    "judge_output": "상태 판정 Output",
+    "record_writer_input": "저장 판단 Input",
+    "db_result": "DB Result(저장 결정·요약)",
+    "db_after_store": "DB 상태(저장 결정 반영 뒤)",
+    "planner_input": "Plan Input",
+    "transition_plan": "Transition Plan",
+    "staff_console_input": "직원 화면 Input",
+    "lora_b_input": "LoRA-B Input",
+    "lora_b_output": "LoRA-B Output",
+    "frontend_input": "사용자 응답(프론트 Input)",
+    "orchestrator_output": "LangGraph 출력(턴 종류·로그)",
+    "dispatch_input": "결과 전달 Input",
+    "dispatch_output": "결과 전달 Output",
+    "db_final": "DB 상태(턴 쓰기 반영 뒤)"
+  },
+  "turns": [
+    {
+      "turn": 1,
+      "source_case": "B2",
+      "situation": {
+        "B2": "일부만 답함"
+      },
+      "utterance": "소주 마셔요",
+      "trace": {
+        "input_message": {
+          "contract": "FrontendMessage",
+          "data": {
+            "session_id": "S-TEST",
+            "kind": "UTTERANCE",
+            "utterance": "소주 마셔요"
+          }
+        },
+        "orchestrator_input": {
+          "contract": "OrchestratorInput",
+          "data": {
+            "frontend_input": {
+              "session_id": "S-TEST",
+              "kind": "UTTERANCE",
+              "utterance": "소주 마셔요"
+            },
+            "intervention_decision": null,
+            "session_found": true,
+            "session_question_bank_version": 1,
+            "session_status": "IN_PROGRESS",
+            "latest_question_bank_version": 1
+          }
+        },
+        "db_before": {
+          "contract": "SessionStore",
+          "data": {
+            "session_info": {
+              "session_id": "S-TEST",
+              "question_bank_version": 1
+            },
+            "answer_records": [
+              {
+                "slot": {
+                  "question_id": "Q1",
+                  "repeat_key": "",
+                  "slot_id": "상태"
+                },
+                "current_value": {
+                  "answer": "안 피움"
+                },
+                "risk_mark": null,
+                "history": [],
+                "pending": null
+              },
+              {
+                "slot": {
+                  "question_id": "Q2",
+                  "repeat_key": "",
+                  "slot_id": "개비"
+                },
+                "current_value": "NONE",
+                "risk_mark": null,
+                "history": [],
+                "pending": null
+              },
+              {
+                "slot": {
+                  "question_id": "Q3a",
+                  "repeat_key": "",
+                  "slot_id": "여부"
+                },
+                "current_value": {
+                  "answer": "마심"
+                },
+                "risk_mark": null,
+                "history": [],
+                "pending": null
+              },
+              {
+                "slot": {
+                  "question_id": "Q3b",
+                  "repeat_key": "",
+                  "slot_id": "빈도"
+                },
+                "current_value": "NONE",
+                "risk_mark": null,
+                "history": [],
+                "pending": null
+              },
+              {
+                "slot": {
+                  "question_id": "Q3b",
+                  "repeat_key": "",
+                  "slot_id": "종류"
+                },
+                "current_value": "NONE",
+                "risk_mark": null,
+                "history": [],
+                "pending": null
+              },
+              {
+                "slot": {
+                  "question_id": "Q3b",
+                  "repeat_key": "",
+                  "slot_id": "1회양"
+                },
+                "current_value": "NONE",
+                "risk_mark": null,
+                "history": [],
+                "pending": null
+              },
+              {
+                "slot": {
+                  "question_id": "Q4",
+                  "repeat_key": "",
+                  "slot_id": "여부"
+                },
+                "current_value": "NONE",
+                "risk_mark": null,
+                "history": [],
+                "pending": null
+              },
+              {
+                "slot": {
+                  "question_id": "Q5",
+                  "repeat_key": "",
+                  "slot_id": "시간"
+                },
+                "current_value": "NONE",
+                "risk_mark": null,
+                "history": [],
+                "pending": null
+              },
+              {
+                "slot": {
+                  "question_id": "Q6",
+                  "repeat_key": "",
+                  "slot_id": "여부"
+                },
+                "current_value": "NONE",
+                "risk_mark": null,
+                "history": [],
+                "pending": null
+              },
+              {
+                "slot": {
+                  "question_id": "Q7",
+                  "repeat_key": "",
+                  "slot_id": "수축기"
+                },
+                "current_value": "NONE",
+                "risk_mark": null,
+                "history": [],
+                "pending": null
+              },
+              {
+                "slot": {
+                  "question_id": "Q7",
+                  "repeat_key": "",
+                  "slot_id": "이완기"
+                },
+                "current_value": "NONE",
+                "risk_mark": null,
+                "history": [],
+                "pending": null
+              },
+              {
+                "slot": {
+                  "question_id": "Q8",
+                  "repeat_key": "",
+                  "slot_id": "횟수"
+                },
+                "current_value": "NONE",
+                "risk_mark": null,
+                "history": [],
+                "pending": null
+              },
+              {
+                "slot": {
+                  "question_id": "Q3c",
+                  "repeat_key": "소주",
+                  "slot_id": "양"
+                },
+                "current_value": "NONE",
+                "risk_mark": null,
+                "history": [],
+                "pending": null
+              },
+              {
+                "slot": {
+                  "question_id": "Q3c",
+                  "repeat_key": "맥주",
+                  "slot_id": "양"
+                },
+                "current_value": "NONE",
+                "risk_mark": null,
+                "history": [],
+                "pending": null
+              },
+              {
+                "slot": {
+                  "question_id": "Q3c",
+                  "repeat_key": "막걸리",
+                  "slot_id": "양"
+                },
+                "current_value": "NONE",
+                "risk_mark": null,
+                "history": [],
+                "pending": null
+              },
+              {
+                "slot": {
+                  "question_id": "Q3c",
+                  "repeat_key": "와인",
+                  "slot_id": "양"
+                },
+                "current_value": "NONE",
+                "risk_mark": null,
+                "history": [],
+                "pending": null
+              },
+              {
+                "slot": {
+                  "question_id": "Q3c",
+                  "repeat_key": "기타",
+                  "slot_id": "양"
+                },
+                "current_value": "NONE",
+                "risk_mark": null,
+                "history": [],
+                "pending": null
+              }
+            ],
+            "progress_record": {
+              "last_directive": {
+                "action": "ASK_NEXT",
+                "targets": [
+                  {
+                    "question_id": "Q3b",
+                    "whole_question": true
+                  }
+                ],
+                "target_pending_id": null,
+                "awaiting": {
+                  "action": "ASK_NEXT",
+                  "targets": [
+                    {
+                      "question_id": "Q3b",
+                      "whole_question": true
+                    }
+                  ],
+                  "target_pending_id": null,
+                  "say_values": []
+                },
+                "say_values": [],
+                "reask_reasons": [],
+                "notices": [],
+                "sentence_materials": {
+                  "question_sentences": [],
+                  "refusal_explanations": [],
+                  "reask_sentences": [],
+                  "choices": [],
+                  "guide_sentences": [],
+                  "fixed_sentences": []
+                }
+              },
+              "open_requests": {
+                "correction_requests": [],
+                "stop_requested": false,
+                "deferred": []
+              },
+              "skipped": [],
+              "confirm_stopped": [],
+              "session_status": "IN_PROGRESS",
+              "pause_history": []
+            },
+            "planner_record": {
+              "attempt_counts": [],
+              "confirm_counts": [],
+              "unknown_counts": [],
+              "refusal_counts": [],
+              "unrecognized_streak": 0,
+              "ask_counts": []
+            },
+            "dialogue_log": [],
+            "dispatch_log": []
+          }
+        },
+        "lora_a_input": {
+          "contract": "UtteranceParserInput",
+          "data": {
+            "utterance": "소주 마셔요",
+            "last_directive": {
+              "action": "ASK_NEXT",
+              "targets": [
+                {
+                  "question_id": "Q3b",
+                  "whole_question": true
+                }
+              ],
+              "target_pending_id": null,
+              "awaiting": {
+                "action": "ASK_NEXT",
+                "targets": [
+                  {
+                    "question_id": "Q3b",
+                    "whole_question": true
+                  }
+                ],
+                "target_pending_id": null,
+                "say_values": []
+              },
+              "say_values": [],
+              "reask_reasons": [],
+              "notices": [],
+              "sentence_materials": {
+                "question_sentences": [],
+                "refusal_explanations": [],
+                "reask_sentences": [],
+                "choices": [],
+                "guide_sentences": [],
+                "fixed_sentences": []
+              }
+            },
+            "awaiting_questions": [
+              {
+                "question_id": "Q3b",
+                "name": "음주 상세",
+                "order": 4,
+                "prerequisite": {
+                  "slot": {
+                    "question_id": "Q3a",
+                    "repeat_key": "",
+                    "slot_id": "여부"
+                  },
+                  "value": "마심"
+                },
+                "question_sentence": "얼마나 자주, 어떤 술을 한 번에 얼마나 드세요?",
+                "refusal_explanation": "음주량은 간 건강을 보는 기준이라 여쭙습니다.",
+                "guide_sentences": [
+                  {
+                    "guide_id": "설명",
+                    "sentence": "마시는 횟수와 종류, 한 번에 드시는 양을 여쭙는 것입니다."
+                  },
+                  {
+                    "guide_id": "목적",
+                    "sentence": "주당 음주량으로 위험 음주 여부를 봅니다."
+                  }
+                ],
+                "affected_followups": [],
+                "policy": {
+                  "question_limit": 3,
+                  "unknown_accept_after": 1,
+                  "refusal_accept_after": 1
+                },
+                "repeat_keys": [],
+                "slots": [
+                  {
+                    "slot_id": "빈도",
+                    "units": [
+                      {
+                        "name": "주 n회",
+                        "synonyms": [
+                          "일주일",
+                          "주일"
+                        ],
+                        "range": [
+                          0,
+                          21
+                        ],
+                        "convert_to": null
+                      },
+                      {
+                        "name": "월 n회",
+                        "synonyms": [
+                          "한 달",
+                          "달"
+                        ],
+                        "range": [
+                          0,
+                          93
+                        ],
+                        "convert_to": null
+                      }
+                    ],
+                    "choices": [],
+                    "yes_no_map": null,
+                    "required": true,
+                    "reask_sentence": "일주일이나 한 달에 몇 번 드시는지 말씀해 주세요.",
+                    "risk_rule": null
+                  },
+                  {
+                    "slot_id": "종류",
+                    "units": [],
+                    "choices": [
+                      "소주",
+                      "맥주",
+                      "막걸리",
+                      "와인",
+                      "기타"
+                    ],
+                    "yes_no_map": null,
+                    "required": true,
+                    "reask_sentence": "어떤 술을 주로 드시는지 말씀해 주세요.",
+                    "risk_rule": null
+                  },
+                  {
+                    "slot_id": "1회양",
+                    "units": [
+                      {
+                        "name": "잔",
+                        "synonyms": [],
+                        "range": [
+                          0,
+                          50
+                        ],
+                        "convert_to": null
+                      },
+                      {
+                        "name": "병",
+                        "synonyms": [],
+                        "range": [
+                          0,
+                          10
+                        ],
+                        "convert_to": null
+                      }
+                    ],
+                    "choices": [],
+                    "yes_no_map": null,
+                    "required": true,
+                    "reask_sentence": "한 번에 얼마나 드시는지 말씀해 주세요.",
+                    "risk_rule": null
+                  }
+                ]
+              }
+            ],
+            "question_names": [
+              {
+                "question_id": "Q1",
+                "name": "흡연",
+                "slots": [
+                  "상태"
+                ]
+              },
+              {
+                "question_id": "Q2",
+                "name": "흡연량",
+                "slots": [
+                  "개비"
+                ]
+              },
+              {
+                "question_id": "Q3a",
+                "name": "음주 여부",
+                "slots": [
+                  "여부"
+                ]
+              },
+              {
+                "question_id": "Q3b",
+                "name": "음주 상세",
+                "slots": [
+                  "빈도",
+                  "종류",
+                  "1회양"
+                ]
+              },
+              {
+                "question_id": "Q4",
+                "name": "폭음",
+                "slots": [
+                  "여부"
+                ]
+              },
+              {
+                "question_id": "Q5",
+                "name": "수면",
+                "slots": [
+                  "시간"
+                ]
+              },
+              {
+                "question_id": "Q6",
+                "name": "죽고 싶은 생각",
+                "slots": [
+                  "여부"
+                ]
+              },
+              {
+                "question_id": "Q7",
+                "name": "혈압",
+                "slots": [
+                  "수축기",
+                  "이완기"
+                ]
+              },
+              {
+                "question_id": "Q8",
+                "name": "운동",
+                "slots": [
+                  "횟수"
+                ]
+              },
+              {
+                "question_id": "Q3c",
+                "name": "주종별 음주량",
+                "slots": [
+                  "양"
+                ]
+              }
+            ],
+            "answered_slots": [
+              {
+                "slot": {
+                  "question_id": "Q1",
+                  "repeat_key": "",
+                  "slot_id": "상태"
+                },
+                "value": "안 피움"
+              },
+              {
+                "slot": {
+                  "question_id": "Q3a",
+                  "repeat_key": "",
+                  "slot_id": "여부"
+                },
+                "value": "마심"
+              }
+            ],
+            "guide_list": [
+              {
+                "guide_id": "설명",
+                "selection_criterion": "질문에 나온 말의 뜻을 물음"
+              },
+              {
+                "guide_id": "목적",
+                "selection_criterion": "이 질문을 왜 하는지 물음"
+              },
+              {
+                "guide_id": "진행",
+                "selection_criterion": "얼마나 남았는지 물음"
+              },
+              {
+                "guide_id": "개인정보",
+                "selection_criterion": "답을 누가 보는지, 어디에 쓰는지 물음"
+              },
+              {
+                "guide_id": "의료판단",
+                "selection_criterion": "자기 답이 건강상 괜찮은지 판단을 물음"
+              }
+            ]
+          }
+        },
+        "lora_a_output": {
+          "contract": "ParserOutput",
+          "data": {
+            "items": [
+              {
+                "item_no": 0,
+                "target": {
+                  "question_id": "Q3b",
+                  "repeat_key": "",
+                  "slot_id": "종류"
+                },
+                "value": "소주",
+                "source_text": "소주",
+                "intent": "ANSWERED_INTENT",
+                "progress_op": null,
+                "guide_id": null
+              }
+            ]
+          }
+        },
+        "normalizer_input": {
+          "contract": "AnswerNormalizerInput",
+          "data": {
+            "items": [
+              {
+                "item_no": 0,
+                "target": {
+                  "question_id": "Q3b",
+                  "repeat_key": "",
+                  "slot_id": "종류"
+                },
+                "value": "소주",
+                "source_text": "소주",
+                "intent": "ANSWERED_INTENT",
+                "progress_op": null,
+                "guide_id": null
+              }
+            ],
+            "related_questions": [
+              {
+                "question_id": "Q3b",
+                "name": "음주 상세",
+                "order": 4,
+                "prerequisite": {
+                  "slot": {
+                    "question_id": "Q3a",
+                    "repeat_key": "",
+                    "slot_id": "여부"
+                  },
+                  "value": "마심"
+                },
+                "question_sentence": "얼마나 자주, 어떤 술을 한 번에 얼마나 드세요?",
+                "refusal_explanation": "음주량은 간 건강을 보는 기준이라 여쭙습니다.",
+                "guide_sentences": [
+                  {
+                    "guide_id": "설명",
+                    "sentence": "마시는 횟수와 종류, 한 번에 드시는 양을 여쭙는 것입니다."
+                  },
+                  {
+                    "guide_id": "목적",
+                    "sentence": "주당 음주량으로 위험 음주 여부를 봅니다."
+                  }
+                ],
+                "affected_followups": [],
+                "policy": {
+                  "question_limit": 3,
+                  "unknown_accept_after": 1,
+                  "refusal_accept_after": 1
+                },
+                "repeat_keys": [],
+                "slots": [
+                  {
+                    "slot_id": "빈도",
+                    "units": [
+                      {
+                        "name": "주 n회",
+                        "synonyms": [
+                          "일주일",
+                          "주일"
+                        ],
+                        "range": [
+                          0,
+                          21
+                        ],
+                        "convert_to": null
+                      },
+                      {
+                        "name": "월 n회",
+                        "synonyms": [
+                          "한 달",
+                          "달"
+                        ],
+                        "range": [
+                          0,
+                          93
+                        ],
+                        "convert_to": null
+                      }
+                    ],
+                    "choices": [],
+                    "yes_no_map": null,
+                    "required": true,
+                    "reask_sentence": "일주일이나 한 달에 몇 번 드시는지 말씀해 주세요.",
+                    "risk_rule": null
+                  },
+                  {
+                    "slot_id": "종류",
+                    "units": [],
+                    "choices": [
+                      "소주",
+                      "맥주",
+                      "막걸리",
+                      "와인",
+                      "기타"
+                    ],
+                    "yes_no_map": null,
+                    "required": true,
+                    "reask_sentence": "어떤 술을 주로 드시는지 말씀해 주세요.",
+                    "risk_rule": null
+                  },
+                  {
+                    "slot_id": "1회양",
+                    "units": [
+                      {
+                        "name": "잔",
+                        "synonyms": [],
+                        "range": [
+                          0,
+                          50
+                        ],
+                        "convert_to": null
+                      },
+                      {
+                        "name": "병",
+                        "synonyms": [],
+                        "range": [
+                          0,
+                          10
+                        ],
+                        "convert_to": null
+                      }
+                    ],
+                    "choices": [],
+                    "yes_no_map": null,
+                    "required": true,
+                    "reask_sentence": "한 번에 얼마나 드시는지 말씀해 주세요.",
+                    "risk_rule": null
+                  }
+                ]
+              },
+              {
+                "question_id": "Q3a",
+                "name": "음주 여부",
+                "order": 3,
+                "prerequisite": null,
+                "question_sentence": "술은 드시나요?",
+                "refusal_explanation": "음주 여부는 간 기능과 약 처방에 영향이 있어 여쭙습니다.",
+                "guide_sentences": [
+                  {
+                    "guide_id": "설명",
+                    "sentence": "최근에도 술을 드시는지 여쭙는 것입니다."
+                  },
+                  {
+                    "guide_id": "목적",
+                    "sentence": "음주는 간 수치와 약 선택에 영향이 있어 확인합니다."
+                  }
+                ],
+                "affected_followups": [
+                  "Q3b",
+                  "Q4"
+                ],
+                "policy": {
+                  "question_limit": 3,
+                  "unknown_accept_after": 1,
+                  "refusal_accept_after": 1
+                },
+                "repeat_keys": [],
+                "slots": [
+                  {
+                    "slot_id": "여부",
+                    "units": [],
+                    "choices": [
+                      "마심",
+                      "안 마심"
+                    ],
+                    "yes_no_map": {
+                      "yes": "마심",
+                      "no": "안 마심"
+                    },
+                    "required": true,
+                    "reask_sentence": "술을 드시는지 아닌지 말씀해 주세요.",
+                    "risk_rule": null
+                  }
+                ]
+              }
+            ],
+            "current_values": [
+              {
+                "slot": {
+                  "question_id": "Q3b",
+                  "repeat_key": "",
+                  "slot_id": "빈도"
+                },
+                "current_value": "NONE"
+              },
+              {
+                "slot": {
+                  "question_id": "Q3b",
+                  "repeat_key": "",
+                  "slot_id": "종류"
+                },
+                "current_value": "NONE"
+              },
+              {
+                "slot": {
+                  "question_id": "Q3b",
+                  "repeat_key": "",
+                  "slot_id": "1회양"
+                },
+                "current_value": "NONE"
+              },
+              {
+                "slot": {
+                  "question_id": "Q3a",
+                  "repeat_key": "",
+                  "slot_id": "여부"
+                },
+                "current_value": {
+                  "answer": "마심"
+                }
+              }
+            ],
+            "pendings": [],
+            "awaiting": {
+              "action": "ASK_NEXT",
+              "targets": [
+                {
+                  "question_id": "Q3b",
+                  "whole_question": true
+                }
+              ],
+              "target_pending_id": null
+            }
+          }
+        },
+        "normalization_result": {
+          "contract": "NormalizerOutput",
+          "data": {
+            "item_checks": [
+              {
+                "item_no": 0,
+                "standard_value": "소주",
+                "problems": [],
+                "mismatched_slots": [],
+                "vs_current": "NO_CURRENT",
+                "vs_pending": "NO_PENDING",
+                "risk_rule": null,
+                "prerequisite_unmet": false
+              }
+            ],
+            "missing_required_slots": [
+              {
+                "question_id": "Q3b",
+                "repeat_key": "",
+                "slot_id": "빈도"
+              },
+              {
+                "question_id": "Q3b",
+                "repeat_key": "",
+                "slot_id": "1회양"
+              }
+            ]
+          }
+        },
+        "judge_input": {
+          "contract": "AnswerJudgeInput",
+          "data": {
+            "items": [
+              {
+                "item_no": 0,
+                "target": {
+                  "question_id": "Q3b",
+                  "repeat_key": "",
+                  "slot_id": "종류"
+                },
+                "value": "소주",
+                "source_text": "소주",
+                "intent": "ANSWERED_INTENT",
+                "progress_op": null,
+                "guide_id": null
+              }
+            ],
+            "item_checks": [
+              {
+                "item_no": 0,
+                "standard_value": "소주",
+                "problems": [],
+                "mismatched_slots": [],
+                "vs_current": "NO_CURRENT",
+                "vs_pending": "NO_PENDING",
+                "risk_rule": null,
+                "prerequisite_unmet": false
+              }
+            ],
+            "missing_required_slots": [
+              {
+                "question_id": "Q3b",
+                "repeat_key": "",
+                "slot_id": "빈도"
+              },
+              {
+                "question_id": "Q3b",
+                "repeat_key": "",
+                "slot_id": "1회양"
+              }
+            ],
+            "utterance": "소주 마셔요",
+            "risk_phrases": [
+              "숨이 안",
+              "가슴이 너무 아파",
+              "쓰러질 것 같",
+              "죽고 싶"
+            ],
+            "last_directive": {
+              "action": "ASK_NEXT",
+              "targets": [
+                {
+                  "question_id": "Q3b",
+                  "whole_question": true
+                }
+              ],
+              "target_pending_id": null,
+              "awaiting": {
+                "action": "ASK_NEXT",
+                "targets": [
+                  {
+                    "question_id": "Q3b",
+                    "whole_question": true
+                  }
+                ],
+                "target_pending_id": null,
+                "say_values": []
+              },
+              "say_values": [],
+              "reask_reasons": [],
+              "notices": [],
+              "sentence_materials": {
+                "question_sentences": [],
+                "refusal_explanations": [],
+                "reask_sentences": [],
+                "choices": [],
+                "guide_sentences": [],
+                "fixed_sentences": []
+              }
+            },
+            "pendings": [],
+            "affected_followups": [
+              {
+                "question_id": "Q1",
+                "followups": [
+                  "Q2"
+                ]
+              },
+              {
+                "question_id": "Q2",
+                "followups": []
+              },
+              {
+                "question_id": "Q3a",
+                "followups": [
+                  "Q3b",
+                  "Q4"
+                ]
+              },
+              {
+                "question_id": "Q3b",
+                "followups": []
+              },
+              {
+                "question_id": "Q4",
+                "followups": []
+              },
+              {
+                "question_id": "Q5",
+                "followups": []
+              },
+              {
+                "question_id": "Q6",
+                "followups": []
+              },
+              {
+                "question_id": "Q7",
+                "followups": []
+              },
+              {
+                "question_id": "Q8",
+                "followups": []
+              },
+              {
+                "question_id": "Q3c",
+                "followups": []
+              }
+            ],
+            "question_slots": []
+          }
+        },
+        "judge_output": {
+          "contract": "JudgeOutput",
+          "data": {
+            "judgments": [
+              {
+                "target": {
+                  "question_id": "Q3b",
+                  "repeat_key": "",
+                  "slot_id": "종류"
+                },
+                "status": "ANSWERED",
+                "reasons": [],
+                "value_now": "소주",
+                "said_value": null,
+                "pending_handling": "NONE",
+                "target_pending_ids": [],
+                "mismatched_slots": [],
+                "risk_rule": null
+              },
+              {
+                "target": {
+                  "question_id": "Q3b",
+                  "repeat_key": "",
+                  "slot_id": "빈도"
+                },
+                "status": "MISSING",
+                "reasons": [
+                  "MISSING_SLOT"
+                ],
+                "value_now": null,
+                "said_value": null,
+                "pending_handling": "NONE",
+                "target_pending_ids": [],
+                "mismatched_slots": [],
+                "risk_rule": null
+              },
+              {
+                "target": {
+                  "question_id": "Q3b",
+                  "repeat_key": "",
+                  "slot_id": "1회양"
+                },
+                "status": "MISSING",
+                "reasons": [
+                  "MISSING_SLOT"
+                ],
+                "value_now": null,
+                "said_value": null,
+                "pending_handling": "NONE",
+                "target_pending_ids": [],
+                "mismatched_slots": [],
+                "risk_rule": null
+              }
+            ],
+            "invalidated_questions": [],
+            "utterance_judgment": {
+              "result": "HAS_ANSWER",
+              "valueless_correction_requests": [],
+              "confirmation": "NONE",
+              "requests": [],
+              "risk_signal": null
+            }
+          }
+        },
+        "record_writer_input": {
+          "contract": "RecordWriterInput",
+          "data": {
+            "judgments": [
+              {
+                "target": {
+                  "question_id": "Q3b",
+                  "repeat_key": "",
+                  "slot_id": "종류"
+                },
+                "status": "ANSWERED",
+                "reasons": [],
+                "value_now": "소주",
+                "said_value": null,
+                "pending_handling": "NONE",
+                "target_pending_ids": [],
+                "mismatched_slots": [],
+                "risk_rule": null
+              },
+              {
+                "target": {
+                  "question_id": "Q3b",
+                  "repeat_key": "",
+                  "slot_id": "빈도"
+                },
+                "status": "MISSING",
+                "reasons": [
+                  "MISSING_SLOT"
+                ],
+                "value_now": null,
+                "said_value": null,
+                "pending_handling": "NONE",
+                "target_pending_ids": [],
+                "mismatched_slots": [],
+                "risk_rule": null
+              },
+              {
+                "target": {
+                  "question_id": "Q3b",
+                  "repeat_key": "",
+                  "slot_id": "1회양"
+                },
+                "status": "MISSING",
+                "reasons": [
+                  "MISSING_SLOT"
+                ],
+                "value_now": null,
+                "said_value": null,
+                "pending_handling": "NONE",
+                "target_pending_ids": [],
+                "mismatched_slots": [],
+                "risk_rule": null
+              }
+            ],
+            "invalidated_questions": [],
+            "question_slots": [],
+            "target_records": [
+              {
+                "slot": {
+                  "question_id": "Q3b",
+                  "repeat_key": "",
+                  "slot_id": "종류"
+                },
+                "current_value": "NONE",
+                "pending": null
+              },
+              {
+                "slot": {
+                  "question_id": "Q3b",
+                  "repeat_key": "",
+                  "slot_id": "빈도"
+                },
+                "current_value": "NONE",
+                "pending": null
+              },
+              {
+                "slot": {
+                  "question_id": "Q3b",
+                  "repeat_key": "",
+                  "slot_id": "1회양"
+                },
+                "current_value": "NONE",
+                "pending": null
+              }
+            ]
+          }
+        },
+        "db_result": {
+          "contract": "StoreResult",
+          "data": {
+            "store_decisions": [
+              {
+                "slot": {
+                  "question_id": "Q3b",
+                  "repeat_key": "",
+                  "slot_id": "종류"
+                },
+                "action": "FIRST_WRITE",
+                "value": "소주",
+                "pending_id": null,
+                "risk_mark": null
+              }
+            ],
+            "store_summary": {
+              "changed_slots": [
+                {
+                  "slot": {
+                    "question_id": "Q3b",
+                    "repeat_key": "",
+                    "slot_id": "종류"
+                  },
+                  "previous_value": null,
+                  "new_value": "소주",
+                  "kind": "FIRST_ANSWER"
+                }
+              ],
+              "unknown_refused_records": [],
+              "created_pendings": [],
+              "resolved_pendings": [],
+              "invalidated_questions": []
+            }
+          }
+        },
+        "db_after_store": {
+          "contract": "SessionStore",
+          "data": {
+            "session_info": {
+              "session_id": "S-TEST",
+              "question_bank_version": 1
+            },
+            "answer_records": [
+              {
+                "slot": {
+                  "question_id": "Q1",
+                  "repeat_key": "",
+                  "slot_id": "상태"
+                },
+                "current_value": {
+                  "answer": "안 피움"
+                },
+                "risk_mark": null,
+                "history": [],
+                "pending": null
+              },
+              {
+                "slot": {
+                  "question_id": "Q2",
+                  "repeat_key": "",
+                  "slot_id": "개비"
+                },
+                "current_value": "NONE",
+                "risk_mark": null,
+                "history": [],
+                "pending": null
+              },
+              {
+                "slot": {
+                  "question_id": "Q3a",
+                  "repeat_key": "",
+                  "slot_id": "여부"
+                },
+                "current_value": {
+                  "answer": "마심"
+                },
+                "risk_mark": null,
+                "history": [],
+                "pending": null
+              },
+              {
+                "slot": {
+                  "question_id": "Q3b",
+                  "repeat_key": "",
+                  "slot_id": "빈도"
+                },
+                "current_value": "NONE",
+                "risk_mark": null,
+                "history": [],
+                "pending": null
+              },
+              {
+                "slot": {
+                  "question_id": "Q3b",
+                  "repeat_key": "",
+                  "slot_id": "종류"
+                },
+                "current_value": {
+                  "answer": "소주"
+                },
+                "risk_mark": null,
+                "history": [],
+                "pending": null
+              },
+              {
+                "slot": {
+                  "question_id": "Q3b",
+                  "repeat_key": "",
+                  "slot_id": "1회양"
+                },
+                "current_value": "NONE",
+                "risk_mark": null,
+                "history": [],
+                "pending": null
+              },
+              {
+                "slot": {
+                  "question_id": "Q4",
+                  "repeat_key": "",
+                  "slot_id": "여부"
+                },
+                "current_value": "NONE",
+                "risk_mark": null,
+                "history": [],
+                "pending": null
+              },
+              {
+                "slot": {
+                  "question_id": "Q5",
+                  "repeat_key": "",
+                  "slot_id": "시간"
+                },
+                "current_value": "NONE",
+                "risk_mark": null,
+                "history": [],
+                "pending": null
+              },
+              {
+                "slot": {
+                  "question_id": "Q6",
+                  "repeat_key": "",
+                  "slot_id": "여부"
+                },
+                "current_value": "NONE",
+                "risk_mark": null,
+                "history": [],
+                "pending": null
+              },
+              {
+                "slot": {
+                  "question_id": "Q7",
+                  "repeat_key": "",
+                  "slot_id": "수축기"
+                },
+                "current_value": "NONE",
+                "risk_mark": null,
+                "history": [],
+                "pending": null
+              },
+              {
+                "slot": {
+                  "question_id": "Q7",
+                  "repeat_key": "",
+                  "slot_id": "이완기"
+                },
+                "current_value": "NONE",
+                "risk_mark": null,
+                "history": [],
+                "pending": null
+              },
+              {
+                "slot": {
+                  "question_id": "Q8",
+                  "repeat_key": "",
+                  "slot_id": "횟수"
+                },
+                "current_value": "NONE",
+                "risk_mark": null,
+                "history": [],
+                "pending": null
+              },
+              {
+                "slot": {
+                  "question_id": "Q3c",
+                  "repeat_key": "소주",
+                  "slot_id": "양"
+                },
+                "current_value": "NONE",
+                "risk_mark": null,
+                "history": [],
+                "pending": null
+              },
+              {
+                "slot": {
+                  "question_id": "Q3c",
+                  "repeat_key": "맥주",
+                  "slot_id": "양"
+                },
+                "current_value": "NONE",
+                "risk_mark": null,
+                "history": [],
+                "pending": null
+              },
+              {
+                "slot": {
+                  "question_id": "Q3c",
+                  "repeat_key": "막걸리",
+                  "slot_id": "양"
+                },
+                "current_value": "NONE",
+                "risk_mark": null,
+                "history": [],
+                "pending": null
+              },
+              {
+                "slot": {
+                  "question_id": "Q3c",
+                  "repeat_key": "와인",
+                  "slot_id": "양"
+                },
+                "current_value": "NONE",
+                "risk_mark": null,
+                "history": [],
+                "pending": null
+              },
+              {
+                "slot": {
+                  "question_id": "Q3c",
+                  "repeat_key": "기타",
+                  "slot_id": "양"
+                },
+                "current_value": "NONE",
+                "risk_mark": null,
+                "history": [],
+                "pending": null
+              }
+            ],
+            "progress_record": {
+              "last_directive": {
+                "action": "ASK_NEXT",
+                "targets": [
+                  {
+                    "question_id": "Q3b",
+                    "whole_question": true
+                  }
+                ],
+                "target_pending_id": null,
+                "awaiting": {
+                  "action": "ASK_NEXT",
+                  "targets": [
+                    {
+                      "question_id": "Q3b",
+                      "whole_question": true
+                    }
+                  ],
+                  "target_pending_id": null,
+                  "say_values": []
+                },
+                "say_values": [],
+                "reask_reasons": [],
+                "notices": [],
+                "sentence_materials": {
+                  "question_sentences": [],
+                  "refusal_explanations": [],
+                  "reask_sentences": [],
+                  "choices": [],
+                  "guide_sentences": [],
+                  "fixed_sentences": []
+                }
+              },
+              "open_requests": {
+                "correction_requests": [],
+                "stop_requested": false,
+                "deferred": []
+              },
+              "skipped": [],
+              "confirm_stopped": [],
+              "session_status": "IN_PROGRESS",
+              "pause_history": []
+            },
+            "planner_record": {
+              "attempt_counts": [],
+              "confirm_counts": [],
+              "unknown_counts": [],
+              "refusal_counts": [],
+              "unrecognized_streak": 0,
+              "ask_counts": []
+            },
+            "dialogue_log": [],
+            "dispatch_log": []
+          }
+        },
+        "planner_input": {
+          "contract": "DialoguePlannerInput",
+          "data": {
+            "turn_kind": "UTTERANCE",
+            "utterance_judgment": {
+              "result": "HAS_ANSWER",
+              "valueless_correction_requests": [],
+              "confirmation": "NONE",
+              "requests": [],
+              "risk_signal": null
+            },
+            "judgments": [
+              {
+                "target": {
+                  "question_id": "Q3b",
+                  "repeat_key": "",
+                  "slot_id": "종류"
+                },
+                "status": "ANSWERED",
+                "reasons": [],
+                "value_now": "소주",
+                "said_value": null,
+                "pending_handling": "NONE",
+                "target_pending_ids": [],
+                "mismatched_slots": [],
+                "risk_rule": null
+              },
+              {
+                "target": {
+                  "question_id": "Q3b",
+                  "repeat_key": "",
+                  "slot_id": "빈도"
+                },
+                "status": "MISSING",
+                "reasons": [
+                  "MISSING_SLOT"
+                ],
+                "value_now": null,
+                "said_value": null,
+                "pending_handling": "NONE",
+                "target_pending_ids": [],
+                "mismatched_slots": [],
+                "risk_rule": null
+              },
+              {
+                "target": {
+                  "question_id": "Q3b",
+                  "repeat_key": "",
+                  "slot_id": "1회양"
+                },
+                "status": "MISSING",
+                "reasons": [
+                  "MISSING_SLOT"
+                ],
+                "value_now": null,
+                "said_value": null,
+                "pending_handling": "NONE",
+                "target_pending_ids": [],
+                "mismatched_slots": [],
+                "risk_rule": null
+              }
+            ],
+            "store_summary": {
+              "changed_slots": [
+                {
+                  "slot": {
+                    "question_id": "Q3b",
+                    "repeat_key": "",
+                    "slot_id": "종류"
+                  },
+                  "previous_value": null,
+                  "new_value": "소주",
+                  "kind": "FIRST_ANSWER"
+                }
+              ],
+              "unknown_refused_records": [],
+              "created_pendings": [],
+              "resolved_pendings": [],
+              "invalidated_questions": []
+            },
+            "answer_records": [
+              {
+                "slot": {
+                  "question_id": "Q1",
+                  "repeat_key": "",
+                  "slot_id": "상태"
+                },
+                "current_value": {
+                  "answer": "안 피움"
+                },
+                "risk_mark": null,
+                "history": [],
+                "pending": null
+              },
+              {
+                "slot": {
+                  "question_id": "Q2",
+                  "repeat_key": "",
+                  "slot_id": "개비"
+                },
+                "current_value": "NONE",
+                "risk_mark": null,
+                "history": [],
+                "pending": null
+              },
+              {
+                "slot": {
+                  "question_id": "Q3a",
+                  "repeat_key": "",
+                  "slot_id": "여부"
+                },
+                "current_value": {
+                  "answer": "마심"
+                },
+                "risk_mark": null,
+                "history": [],
+                "pending": null
+              },
+              {
+                "slot": {
+                  "question_id": "Q3b",
+                  "repeat_key": "",
+                  "slot_id": "빈도"
+                },
+                "current_value": "NONE",
+                "risk_mark": null,
+                "history": [],
+                "pending": null
+              },
+              {
+                "slot": {
+                  "question_id": "Q3b",
+                  "repeat_key": "",
+                  "slot_id": "종류"
+                },
+                "current_value": {
+                  "answer": "소주"
+                },
+                "risk_mark": null,
+                "history": [],
+                "pending": null
+              },
+              {
+                "slot": {
+                  "question_id": "Q3b",
+                  "repeat_key": "",
+                  "slot_id": "1회양"
+                },
+                "current_value": "NONE",
+                "risk_mark": null,
+                "history": [],
+                "pending": null
+              },
+              {
+                "slot": {
+                  "question_id": "Q4",
+                  "repeat_key": "",
+                  "slot_id": "여부"
+                },
+                "current_value": "NONE",
+                "risk_mark": null,
+                "history": [],
+                "pending": null
+              },
+              {
+                "slot": {
+                  "question_id": "Q5",
+                  "repeat_key": "",
+                  "slot_id": "시간"
+                },
+                "current_value": "NONE",
+                "risk_mark": null,
+                "history": [],
+                "pending": null
+              },
+              {
+                "slot": {
+                  "question_id": "Q6",
+                  "repeat_key": "",
+                  "slot_id": "여부"
+                },
+                "current_value": "NONE",
+                "risk_mark": null,
+                "history": [],
+                "pending": null
+              },
+              {
+                "slot": {
+                  "question_id": "Q7",
+                  "repeat_key": "",
+                  "slot_id": "수축기"
+                },
+                "current_value": "NONE",
+                "risk_mark": null,
+                "history": [],
+                "pending": null
+              },
+              {
+                "slot": {
+                  "question_id": "Q7",
+                  "repeat_key": "",
+                  "slot_id": "이완기"
+                },
+                "current_value": "NONE",
+                "risk_mark": null,
+                "history": [],
+                "pending": null
+              },
+              {
+                "slot": {
+                  "question_id": "Q8",
+                  "repeat_key": "",
+                  "slot_id": "횟수"
+                },
+                "current_value": "NONE",
+                "risk_mark": null,
+                "history": [],
+                "pending": null
+              },
+              {
+                "slot": {
+                  "question_id": "Q3c",
+                  "repeat_key": "소주",
+                  "slot_id": "양"
+                },
+                "current_value": "NONE",
+                "risk_mark": null,
+                "history": [],
+                "pending": null
+              },
+              {
+                "slot": {
+                  "question_id": "Q3c",
+                  "repeat_key": "맥주",
+                  "slot_id": "양"
+                },
+                "current_value": "NONE",
+                "risk_mark": null,
+                "history": [],
+                "pending": null
+              },
+              {
+                "slot": {
+                  "question_id": "Q3c",
+                  "repeat_key": "막걸리",
+                  "slot_id": "양"
+                },
+                "current_value": "NONE",
+                "risk_mark": null,
+                "history": [],
+                "pending": null
+              },
+              {
+                "slot": {
+                  "question_id": "Q3c",
+                  "repeat_key": "와인",
+                  "slot_id": "양"
+                },
+                "current_value": "NONE",
+                "risk_mark": null,
+                "history": [],
+                "pending": null
+              },
+              {
+                "slot": {
+                  "question_id": "Q3c",
+                  "repeat_key": "기타",
+                  "slot_id": "양"
+                },
+                "current_value": "NONE",
+                "risk_mark": null,
+                "history": [],
+                "pending": null
+              }
+            ],
+            "last_directive": {
+              "action": "ASK_NEXT",
+              "targets": [
+                {
+                  "question_id": "Q3b",
+                  "whole_question": true
+                }
+              ],
+              "target_pending_id": null,
+              "awaiting": {
+                "action": "ASK_NEXT",
+                "targets": [
+                  {
+                    "question_id": "Q3b",
+                    "whole_question": true
+                  }
+                ],
+                "target_pending_id": null,
+                "say_values": []
+              },
+              "say_values": [],
+              "reask_reasons": [],
+              "notices": [],
+              "sentence_materials": {
+                "question_sentences": [],
+                "refusal_explanations": [],
+                "reask_sentences": [],
+                "choices": [],
+                "guide_sentences": [],
+                "fixed_sentences": []
+              }
+            },
+            "skipped": [],
+            "confirm_stopped": [],
+            "open_requests": {
+              "correction_requests": [],
+              "stop_requested": false,
+              "deferred": []
+            },
+            "planner_record": {
+              "attempt_counts": [],
+              "confirm_counts": [],
+              "unknown_counts": [],
+              "refusal_counts": [],
+              "unrecognized_streak": 0,
+              "ask_counts": []
+            },
+            "question_bank": {
+              "version": 1,
+              "questions": [
+                {
+                  "question_id": "Q1",
+                  "name": "흡연",
+                  "order": 1,
+                  "prerequisite": null,
+                  "question_sentence": "담배는 피우시나요?",
+                  "refusal_explanation": "흡연 여부는 폐 건강을 보는 데 꼭 필요해서 여쭙습니다.",
+                  "guide_sentences": [
+                    {
+                      "guide_id": "설명",
+                      "sentence": "지금 피우시는지, 끊으셨는지, 원래 안 피우시는지를 여쭙는 것입니다."
+                    },
+                    {
+                      "guide_id": "목적",
+                      "sentence": "흡연은 여러 질환의 위험을 높여 진료 전에 확인합니다."
+                    }
+                  ],
+                  "affected_followups": [
+                    "Q2"
+                  ],
+                  "policy": {
+                    "question_limit": 3,
+                    "unknown_accept_after": 1,
+                    "refusal_accept_after": 1
+                  },
+                  "repeat_keys": [],
+                  "slots": [
+                    {
+                      "slot_id": "상태",
+                      "units": [],
+                      "choices": [
+                        "현재 피움",
+                        "끊음",
+                        "안 피움"
+                      ],
+                      "yes_no_map": null,
+                      "required": true,
+                      "reask_sentence": "현재 피우시는지, 끊으셨는지, 안 피우시는지 말씀해 주세요.",
+                      "risk_rule": null
+                    }
+                  ]
+                },
+                {
+                  "question_id": "Q2",
+                  "name": "흡연량",
+                  "order": 2,
+                  "prerequisite": {
+                    "slot": {
+                      "question_id": "Q1",
+                      "repeat_key": "",
+                      "slot_id": "상태"
+                    },
+                    "value": "현재 피움"
+                  },
+                  "question_sentence": "하루에 몇 개비나 피우세요?",
+                  "refusal_explanation": "흡연량에 따라 권해 드리는 것이 달라져서 여쭙습니다.",
+                  "guide_sentences": [
+                    {
+                      "guide_id": "설명",
+                      "sentence": "하루에 피우시는 담배 개비 수입니다. 갑으로 말씀하셔도 됩니다."
+                    },
+                    {
+                      "guide_id": "목적",
+                      "sentence": "양에 따라 금연 상담 기준이 달라 확인합니다."
+                    }
+                  ],
+                  "affected_followups": [],
+                  "policy": {
+                    "question_limit": 3,
+                    "unknown_accept_after": 1,
+                    "refusal_accept_after": 2
+                  },
+                  "repeat_keys": [],
+                  "slots": [
+                    {
+                      "slot_id": "개비",
+                      "units": [
+                        {
+                          "name": "개비",
+                          "synonyms": [
+                            "개"
+                          ],
+                          "range": [
+                            0,
+                            80
+                          ],
+                          "convert_to": null
+                        },
+                        {
+                          "name": "갑",
+                          "synonyms": [],
+                          "range": null,
+                          "convert_to": {
+                            "unit": "개비",
+                            "factor": 20
+                          }
+                        }
+                      ],
+                      "choices": [],
+                      "yes_no_map": null,
+                      "required": true,
+                      "reask_sentence": "하루에 몇 개비인지 말씀해 주세요.",
+                      "risk_rule": null
+                    }
+                  ]
+                },
+                {
+                  "question_id": "Q3a",
+                  "name": "음주 여부",
+                  "order": 3,
+                  "prerequisite": null,
+                  "question_sentence": "술은 드시나요?",
+                  "refusal_explanation": "음주 여부는 간 기능과 약 처방에 영향이 있어 여쭙습니다.",
+                  "guide_sentences": [
+                    {
+                      "guide_id": "설명",
+                      "sentence": "최근에도 술을 드시는지 여쭙는 것입니다."
+                    },
+                    {
+                      "guide_id": "목적",
+                      "sentence": "음주는 간 수치와 약 선택에 영향이 있어 확인합니다."
+                    }
+                  ],
+                  "affected_followups": [
+                    "Q3b",
+                    "Q4"
+                  ],
+                  "policy": {
+                    "question_limit": 3,
+                    "unknown_accept_after": 1,
+                    "refusal_accept_after": 1
+                  },
+                  "repeat_keys": [],
+                  "slots": [
+                    {
+                      "slot_id": "여부",
+                      "units": [],
+                      "choices": [
+                        "마심",
+                        "안 마심"
+                      ],
+                      "yes_no_map": {
+                        "yes": "마심",
+                        "no": "안 마심"
+                      },
+                      "required": true,
+                      "reask_sentence": "술을 드시는지 아닌지 말씀해 주세요.",
+                      "risk_rule": null
+                    }
+                  ]
+                },
+                {
+                  "question_id": "Q3b",
+                  "name": "음주 상세",
+                  "order": 4,
+                  "prerequisite": {
+                    "slot": {
+                      "question_id": "Q3a",
+                      "repeat_key": "",
+                      "slot_id": "여부"
+                    },
+                    "value": "마심"
+                  },
+                  "question_sentence": "얼마나 자주, 어떤 술을 한 번에 얼마나 드세요?",
+                  "refusal_explanation": "음주량은 간 건강을 보는 기준이라 여쭙습니다.",
+                  "guide_sentences": [
+                    {
+                      "guide_id": "설명",
+                      "sentence": "마시는 횟수와 종류, 한 번에 드시는 양을 여쭙는 것입니다."
+                    },
+                    {
+                      "guide_id": "목적",
+                      "sentence": "주당 음주량으로 위험 음주 여부를 봅니다."
+                    }
+                  ],
+                  "affected_followups": [],
+                  "policy": {
+                    "question_limit": 3,
+                    "unknown_accept_after": 1,
+                    "refusal_accept_after": 1
+                  },
+                  "repeat_keys": [],
+                  "slots": [
+                    {
+                      "slot_id": "빈도",
+                      "units": [
+                        {
+                          "name": "주 n회",
+                          "synonyms": [
+                            "일주일",
+                            "주일"
+                          ],
+                          "range": [
+                            0,
+                            21
+                          ],
+                          "convert_to": null
+                        },
+                        {
+                          "name": "월 n회",
+                          "synonyms": [
+                            "한 달",
+                            "달"
+                          ],
+                          "range": [
+                            0,
+                            93
+                          ],
+                          "convert_to": null
+                        }
+                      ],
+                      "choices": [],
+                      "yes_no_map": null,
+                      "required": true,
+                      "reask_sentence": "일주일이나 한 달에 몇 번 드시는지 말씀해 주세요.",
+                      "risk_rule": null
+                    },
+                    {
+                      "slot_id": "종류",
+                      "units": [],
+                      "choices": [
+                        "소주",
+                        "맥주",
+                        "막걸리",
+                        "와인",
+                        "기타"
+                      ],
+                      "yes_no_map": null,
+                      "required": true,
+                      "reask_sentence": "어떤 술을 주로 드시는지 말씀해 주세요.",
+                      "risk_rule": null
+                    },
+                    {
+                      "slot_id": "1회양",
+                      "units": [
+                        {
+                          "name": "잔",
+                          "synonyms": [],
+                          "range": [
+                            0,
+                            50
+                          ],
+                          "convert_to": null
+                        },
+                        {
+                          "name": "병",
+                          "synonyms": [],
+                          "range": [
+                            0,
+                            10
+                          ],
+                          "convert_to": null
+                        }
+                      ],
+                      "choices": [],
+                      "yes_no_map": null,
+                      "required": true,
+                      "reask_sentence": "한 번에 얼마나 드시는지 말씀해 주세요.",
+                      "risk_rule": null
+                    }
+                  ]
+                },
+                {
+                  "question_id": "Q3c",
+                  "name": "주종별 음주량",
+                  "order": 10,
+                  "prerequisite": {
+                    "slot": {
+                      "question_id": "Q3a",
+                      "repeat_key": "",
+                      "slot_id": "여부"
+                    },
+                    "value": "마심"
+                  },
+                  "question_sentence": "드시는 술 종류별로 한 번에 얼마나 드세요?",
+                  "refusal_explanation": "술 종류마다 알코올 양이 달라 따로 여쭙습니다.",
+                  "guide_sentences": [
+                    {
+                      "guide_id": "설명",
+                      "sentence": "드시는 술마다 한 번에 드시는 양을 따로 여쭙는 것입니다."
+                    },
+                    {
+                      "guide_id": "목적",
+                      "sentence": "종류별 양을 합쳐 주당 알코올 섭취량을 봅니다."
+                    }
+                  ],
+                  "affected_followups": [],
+                  "policy": {
+                    "question_limit": 3,
+                    "unknown_accept_after": 1,
+                    "refusal_accept_after": 1
+                  },
+                  "repeat_keys": [
+                    "소주",
+                    "맥주",
+                    "막걸리",
+                    "와인",
+                    "기타"
+                  ],
+                  "slots": [
+                    {
+                      "slot_id": "양",
+                      "units": [
+                        {
+                          "name": "잔",
+                          "synonyms": [],
+                          "range": [
+                            0,
+                            50
+                          ],
+                          "convert_to": null
+                        },
+                        {
+                          "name": "병",
+                          "synonyms": [],
+                          "range": [
+                            0,
+                            10
+                          ],
+                          "convert_to": null
+                        }
+                      ],
+                      "choices": [],
+                      "yes_no_map": null,
+                      "required": false,
+                      "reask_sentence": "그 술을 한 번에 얼마나 드시는지 말씀해 주세요.",
+                      "risk_rule": null
+                    }
+                  ]
+                },
+                {
+                  "question_id": "Q4",
+                  "name": "폭음",
+                  "order": 5,
+                  "prerequisite": {
+                    "slot": {
+                      "question_id": "Q3a",
+                      "repeat_key": "",
+                      "slot_id": "여부"
+                    },
+                    "value": "마심"
+                  },
+                  "question_sentence": "한 번에 소주 한 병 넘게 드시는 일이 있나요?",
+                  "refusal_explanation": "폭음은 따로 보는 항목이라 여쭙습니다.",
+                  "guide_sentences": [
+                    {
+                      "guide_id": "설명",
+                      "sentence": "한 자리에서 소주 한 병이 넘게 드시는 일이 있는지 여쭙는 것입니다."
+                    },
+                    {
+                      "guide_id": "목적",
+                      "sentence": "폭음은 전체 음주량과 따로 위험을 봅니다."
+                    }
+                  ],
+                  "affected_followups": [],
+                  "policy": {
+                    "question_limit": 3,
+                    "unknown_accept_after": 1,
+                    "refusal_accept_after": 1
+                  },
+                  "repeat_keys": [],
+                  "slots": [
+                    {
+                      "slot_id": "여부",
+                      "units": [],
+                      "choices": [
+                        "예",
+                        "아니요"
+                      ],
+                      "yes_no_map": {
+                        "yes": "예",
+                        "no": "아니요"
+                      },
+                      "required": true,
+                      "reask_sentence": "그런 일이 있으신지 아닌지 말씀해 주세요.",
+                      "risk_rule": null
+                    }
+                  ]
+                },
+                {
+                  "question_id": "Q5",
+                  "name": "수면",
+                  "order": 6,
+                  "prerequisite": null,
+                  "question_sentence": "하루에 몇 시간 주무세요?",
+                  "refusal_explanation": "수면 시간은 피로와 혈압에 관련이 있어 여쭙습니다.",
+                  "guide_sentences": [
+                    {
+                      "guide_id": "설명",
+                      "sentence": "보통 하루에 주무시는 시간입니다."
+                    },
+                    {
+                      "guide_id": "목적",
+                      "sentence": "수면 부족은 혈압과 피로에 영향이 있어 확인합니다."
+                    }
+                  ],
+                  "affected_followups": [],
+                  "policy": {
+                    "question_limit": 3,
+                    "unknown_accept_after": 1,
+                    "refusal_accept_after": 1
+                  },
+                  "repeat_keys": [],
+                  "slots": [
+                    {
+                      "slot_id": "시간",
+                      "units": [
+                        {
+                          "name": "시간",
+                          "synonyms": [],
+                          "range": [
+                            0,
+                            24
+                          ],
+                          "convert_to": null
+                        }
+                      ],
+                      "choices": [],
+                      "yes_no_map": null,
+                      "required": true,
+                      "reask_sentence": "하루에 몇 시간 주무시는지 말씀해 주세요.",
+                      "risk_rule": null
+                    }
+                  ]
+                },
+                {
+                  "question_id": "Q6",
+                  "name": "죽고 싶은 생각",
+                  "order": 7,
+                  "prerequisite": null,
+                  "question_sentence": "최근에 죽고 싶다는 생각을 하신 적이 있나요?",
+                  "refusal_explanation": "답하기 어려우시면 넘어가셔도 됩니다. 도움을 드릴 수 있어 여쭙습니다.",
+                  "guide_sentences": [
+                    {
+                      "guide_id": "설명",
+                      "sentence": "최근 그런 생각이 드신 적이 있는지 여쭙는 것입니다."
+                    },
+                    {
+                      "guide_id": "목적",
+                      "sentence": "그런 생각이 드시면 바로 도움을 드리려고 확인합니다."
+                    }
+                  ],
+                  "affected_followups": [],
+                  "policy": {
+                    "question_limit": 3,
+                    "unknown_accept_after": 1,
+                    "refusal_accept_after": 2
+                  },
+                  "repeat_keys": [],
+                  "slots": [
+                    {
+                      "slot_id": "여부",
+                      "units": [],
+                      "choices": [
+                        "예",
+                        "아니요"
+                      ],
+                      "yes_no_map": {
+                        "yes": "예",
+                        "no": "아니요"
+                      },
+                      "required": true,
+                      "reask_sentence": "그런 생각이 드신 적이 있는지 말씀해 주세요.",
+                      "risk_rule": {
+                        "operator": "=",
+                        "value": "예",
+                        "response": "IMMEDIATE"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "question_id": "Q7",
+                  "name": "혈압",
+                  "order": 8,
+                  "prerequisite": null,
+                  "question_sentence": "최근에 재신 혈압이 어떻게 되세요?",
+                  "refusal_explanation": "혈압은 오늘 진료에 바로 쓰여서 여쭙습니다.",
+                  "guide_sentences": [
+                    {
+                      "guide_id": "설명",
+                      "sentence": "최근에 재신 혈압의 위 숫자와 아래 숫자입니다."
+                    },
+                    {
+                      "guide_id": "목적",
+                      "sentence": "혈압이 높으면 진료 순서를 조정합니다."
+                    }
+                  ],
+                  "affected_followups": [],
+                  "policy": {
+                    "question_limit": 3,
+                    "unknown_accept_after": 2,
+                    "refusal_accept_after": 1
+                  },
+                  "repeat_keys": [],
+                  "slots": [
+                    {
+                      "slot_id": "수축기",
+                      "units": [
+                        {
+                          "name": "mmHg",
+                          "synonyms": [],
+                          "range": [
+                            50,
+                            260
+                          ],
+                          "convert_to": null
+                        }
+                      ],
+                      "choices": [],
+                      "yes_no_map": null,
+                      "required": true,
+                      "reask_sentence": "혈압의 위 숫자를 말씀해 주세요.",
+                      "risk_rule": {
+                        "operator": ">=",
+                        "value": {
+                          "amount": 180,
+                          "unit": "mmHg"
+                        },
+                        "response": "ON_RESULT"
+                      }
+                    },
+                    {
+                      "slot_id": "이완기",
+                      "units": [
+                        {
+                          "name": "mmHg",
+                          "synonyms": [],
+                          "range": [
+                            30,
+                            160
+                          ],
+                          "convert_to": null
+                        }
+                      ],
+                      "choices": [],
+                      "yes_no_map": null,
+                      "required": true,
+                      "reask_sentence": "혈압의 아래 숫자를 말씀해 주세요.",
+                      "risk_rule": {
+                        "operator": ">=",
+                        "value": {
+                          "amount": 110,
+                          "unit": "mmHg"
+                        },
+                        "response": "ON_RESULT"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "question_id": "Q8",
+                  "name": "운동",
+                  "order": 9,
+                  "prerequisite": null,
+                  "question_sentence": "일주일에 몇 번이나 운동하세요?",
+                  "refusal_explanation": "운동 습관은 생활 습관 상담에 쓰여 여쭙습니다.",
+                  "guide_sentences": [
+                    {
+                      "guide_id": "설명",
+                      "sentence": "일주일에 숨이 찰 정도로 움직이시는 횟수입니다."
+                    },
+                    {
+                      "guide_id": "목적",
+                      "sentence": "운동량은 생활 습관 상담의 기준이 됩니다."
+                    }
+                  ],
+                  "affected_followups": [],
+                  "policy": {
+                    "question_limit": 3,
+                    "unknown_accept_after": 1,
+                    "refusal_accept_after": 1
+                  },
+                  "repeat_keys": [],
+                  "slots": [
+                    {
+                      "slot_id": "횟수",
+                      "units": [
+                        {
+                          "name": "주 n회",
+                          "synonyms": [],
+                          "range": [
+                            0,
+                            21
+                          ],
+                          "convert_to": null
+                        }
+                      ],
+                      "choices": [],
+                      "yes_no_map": null,
+                      "required": false,
+                      "reask_sentence": "일주일에 몇 번 하시는지 말씀해 주세요.",
+                      "risk_rule": null
+                    }
+                  ]
+                }
+              ],
+              "session_settings": {
+                "risk_phrases": [
+                  "숨이 안",
+                  "가슴이 너무 아파",
+                  "쓰러질 것 같",
+                  "죽고 싶"
+                ],
+                "confirm_limit": 2,
+                "unrecognized_streak_limit": 2,
+                "ask_limit": 3,
+                "fixed_sentences": [
+                  {
+                    "key": "ASK_REPEAT",
+                    "sentence": "잘 못 들었습니다. 다시 한번 말씀해 주세요."
+                  },
+                  {
+                    "key": "OOS_NOTICE",
+                    "sentence": "그건 제가 도와드리기 어렵습니다."
+                  },
+                  {
+                    "key": "CALL_STAFF",
+                    "sentence": "직원을 불러 드리겠습니다. 잠시만 기다려 주세요."
+                  },
+                  {
+                    "key": "FAREWELL",
+                    "sentence": "문진이 끝났습니다. 수고하셨습니다."
+                  },
+                  {
+                    "key": "ASK_CONFIRM",
+                    "sentence": "어느 쪽이 맞는지 말씀해 주세요."
+                  },
+                  {
+                    "key": "ASK_CORRECTION_TARGET",
+                    "sentence": "어떤 것을 고쳐 드릴까요?"
+                  },
+                  {
+                    "key": "ASK_FINISH",
+                    "sentence": "다 여쭤봤습니다. 이대로 마칠까요?"
+                  },
+                  {
+                    "key": "RISK_NOTICE",
+                    "sentence": "바로 직원을 불렀습니다. 그 자리에 계셔 주세요."
+                  },
+                  {
+                    "key": "RESUME",
+                    "sentence": "다시 이어서 여쭙겠습니다."
+                  },
+                  {
+                    "key": "SURVEY_STOPPED",
+                    "sentence": "문진을 여기서 마치겠습니다."
+                  },
+                  {
+                    "key": "WAIT_NOTICE",
+                    "sentence": "네, 천천히 하세요."
+                  },
+                  {
+                    "key": "ASK_STOP",
+                    "sentence": "문진을 그만두시겠어요?"
+                  },
+                  {
+                    "key": "STAFF_NOTICE",
+                    "sentence": "직원을 불러 드렸습니다. 문진은 이어서 하겠습니다."
+                  },
+                  {
+                    "key": "DEFERRED",
+                    "sentence": "그건 나중에 다시 여쭙겠습니다."
+                  }
+                ],
+                "guide_list": [
+                  {
+                    "guide_id": "설명",
+                    "selection_criterion": "질문에 나온 말의 뜻을 물음",
+                    "per_question": true,
+                    "sentence": null,
+                    "fill_value": null
+                  },
+                  {
+                    "guide_id": "목적",
+                    "selection_criterion": "이 질문을 왜 하는지 물음",
+                    "per_question": true,
+                    "sentence": null,
+                    "fill_value": null
+                  },
+                  {
+                    "guide_id": "진행",
+                    "selection_criterion": "얼마나 남았는지 물음",
+                    "per_question": false,
+                    "sentence": "앞으로 {남은 문항 수}개 더 여쭤보면 끝납니다.",
+                    "fill_value": "REMAINING_COUNT"
+                  },
+                  {
+                    "guide_id": "개인정보",
+                    "selection_criterion": "답을 누가 보는지, 어디에 쓰는지 물음",
+                    "per_question": false,
+                    "sentence": "말씀해 주신 내용은 오늘 진료를 보는 의료진만 봅니다.",
+                    "fill_value": null
+                  },
+                  {
+                    "guide_id": "의료판단",
+                    "selection_criterion": "자기 답이 건강상 괜찮은지 판단을 물음",
+                    "per_question": false,
+                    "sentence": "제가 판단을 드리기는 어렵고, 진료 때 의료진이 봐 드립니다.",
+                    "fill_value": null
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "transition_plan": {
+          "contract": "PlannerOutput",
+          "data": {
+            "directive": {
+              "action": "ASK_MISSING",
+              "targets": [
+                {
+                  "question_id": "Q3b",
+                  "repeat_key": "",
+                  "slot_id": "빈도"
+                },
+                {
+                  "question_id": "Q3b",
+                  "repeat_key": "",
+                  "slot_id": "1회양"
+                }
+              ],
+              "target_pending_id": null,
+              "awaiting": {
+                "action": "ASK_MISSING",
+                "targets": [
+                  {
+                    "question_id": "Q3b",
+                    "repeat_key": "",
+                    "slot_id": "빈도"
+                  },
+                  {
+                    "question_id": "Q3b",
+                    "repeat_key": "",
+                    "slot_id": "1회양"
+                  }
+                ],
+                "target_pending_id": null,
+                "say_values": [
+                  {
+                    "slot": {
+                      "question_id": "Q3b",
+                      "repeat_key": "",
+                      "slot_id": "종류"
+                    },
+                    "question_name": "음주 상세",
+                    "value": "소주",
+                    "role": "JUST_SAVED"
+                  }
+                ]
+              },
+              "say_values": [
+                {
+                  "slot": {
+                    "question_id": "Q3b",
+                    "repeat_key": "",
+                    "slot_id": "종류"
+                  },
+                  "question_name": "음주 상세",
+                  "value": "소주",
+                  "role": "JUST_SAVED"
+                }
+              ],
+              "reask_reasons": [],
+              "notices": [],
+              "sentence_materials": {
+                "question_sentences": [],
+                "refusal_explanations": [],
+                "reask_sentences": [
+                  {
+                    "slot": {
+                      "question_id": "Q3b",
+                      "repeat_key": "",
+                      "slot_id": "빈도"
+                    },
+                    "sentence": "일주일이나 한 달에 몇 번 드시는지 말씀해 주세요."
+                  },
+                  {
+                    "slot": {
+                      "question_id": "Q3b",
+                      "repeat_key": "",
+                      "slot_id": "1회양"
+                    },
+                    "sentence": "한 번에 얼마나 드시는지 말씀해 주세요."
+                  }
+                ],
+                "choices": [],
+                "guide_sentences": [],
+                "fixed_sentences": []
+              }
+            },
+            "flow": "CONTINUE",
+            "staff_alert": null,
+            "progress_record_update": {
+              "last_directive": {
+                "action": "ASK_MISSING",
+                "targets": [
+                  {
+                    "question_id": "Q3b",
+                    "repeat_key": "",
+                    "slot_id": "빈도"
+                  },
+                  {
+                    "question_id": "Q3b",
+                    "repeat_key": "",
+                    "slot_id": "1회양"
+                  }
+                ],
+                "target_pending_id": null,
+                "awaiting": {
+                  "action": "ASK_MISSING",
+                  "targets": [
+                    {
+                      "question_id": "Q3b",
+                      "repeat_key": "",
+                      "slot_id": "빈도"
+                    },
+                    {
+                      "question_id": "Q3b",
+                      "repeat_key": "",
+                      "slot_id": "1회양"
+                    }
+                  ],
+                  "target_pending_id": null,
+                  "say_values": [
+                    {
+                      "slot": {
+                        "question_id": "Q3b",
+                        "repeat_key": "",
+                        "slot_id": "종류"
+                      },
+                      "question_name": "음주 상세",
+                      "value": "소주",
+                      "role": "JUST_SAVED"
+                    }
+                  ]
+                },
+                "say_values": [
+                  {
+                    "slot": {
+                      "question_id": "Q3b",
+                      "repeat_key": "",
+                      "slot_id": "종류"
+                    },
+                    "question_name": "음주 상세",
+                    "value": "소주",
+                    "role": "JUST_SAVED"
+                  }
+                ],
+                "reask_reasons": [],
+                "notices": [],
+                "sentence_materials": {
+                  "question_sentences": [],
+                  "refusal_explanations": [],
+                  "reask_sentences": [
+                    {
+                      "slot": {
+                        "question_id": "Q3b",
+                        "repeat_key": "",
+                        "slot_id": "빈도"
+                      },
+                      "sentence": "일주일이나 한 달에 몇 번 드시는지 말씀해 주세요."
+                    },
+                    {
+                      "slot": {
+                        "question_id": "Q3b",
+                        "repeat_key": "",
+                        "slot_id": "1회양"
+                      },
+                      "sentence": "한 번에 얼마나 드시는지 말씀해 주세요."
+                    }
+                  ],
+                  "choices": [],
+                  "guide_sentences": [],
+                  "fixed_sentences": []
+                }
+              },
+              "open_requests": {
+                "correction_requests": [],
+                "stop_requested": false,
+                "deferred": []
+              },
+              "skipped_add": [],
+              "skipped_remove": [],
+              "confirm_stopped_add": [],
+              "confirm_stopped_remove": [],
+              "session_status": null,
+              "pause_history_add": []
+            },
+            "planner_record_update": {
+              "attempt_counts": [
+                {
+                  "question_id": "Q3b",
+                  "count": 1
+                }
+              ],
+              "confirm_counts": [],
+              "unknown_counts": [],
+              "refusal_counts": [],
+              "unrecognized_streak": 0,
+              "ask_counts": []
+            }
+          }
+        },
+        "lora_b_input": {
+          "contract": "ResponseGeneratorInput",
+          "data": {
+            "directive": {
+              "action": "ASK_MISSING",
+              "targets": [
+                {
+                  "question_id": "Q3b",
+                  "repeat_key": "",
+                  "slot_id": "빈도"
+                },
+                {
+                  "question_id": "Q3b",
+                  "repeat_key": "",
+                  "slot_id": "1회양"
+                }
+              ],
+              "target_pending_id": null,
+              "awaiting": {
+                "action": "ASK_MISSING",
+                "targets": [
+                  {
+                    "question_id": "Q3b",
+                    "repeat_key": "",
+                    "slot_id": "빈도"
+                  },
+                  {
+                    "question_id": "Q3b",
+                    "repeat_key": "",
+                    "slot_id": "1회양"
+                  }
+                ],
+                "target_pending_id": null,
+                "say_values": [
+                  {
+                    "slot": {
+                      "question_id": "Q3b",
+                      "repeat_key": "",
+                      "slot_id": "종류"
+                    },
+                    "question_name": "음주 상세",
+                    "value": "소주",
+                    "role": "JUST_SAVED"
+                  }
+                ]
+              },
+              "say_values": [
+                {
+                  "slot": {
+                    "question_id": "Q3b",
+                    "repeat_key": "",
+                    "slot_id": "종류"
+                  },
+                  "question_name": "음주 상세",
+                  "value": "소주",
+                  "role": "JUST_SAVED"
+                }
+              ],
+              "reask_reasons": [],
+              "notices": [],
+              "sentence_materials": {
+                "question_sentences": [],
+                "refusal_explanations": [],
+                "reask_sentences": [
+                  {
+                    "slot": {
+                      "question_id": "Q3b",
+                      "repeat_key": "",
+                      "slot_id": "빈도"
+                    },
+                    "sentence": "일주일이나 한 달에 몇 번 드시는지 말씀해 주세요."
+                  },
+                  {
+                    "slot": {
+                      "question_id": "Q3b",
+                      "repeat_key": "",
+                      "slot_id": "1회양"
+                    },
+                    "sentence": "한 번에 얼마나 드시는지 말씀해 주세요."
+                  }
+                ],
+                "choices": [],
+                "guide_sentences": [],
+                "fixed_sentences": []
+              }
+            },
+            "utterance": "소주 마셔요"
+          }
+        },
+        "lora_b_output": {
+          "contract": "GeneratorOutput",
+          "data": {
+            "response_text": "음주 상세 소주. 일주일이나 한 달에 몇 번 드시는지 말씀해 주세요. 한 번에 얼마나 드시는지 말씀해 주세요.",
+            "is_fallback": true
+          }
+        },
+        "frontend_input": {
+          "contract": "FrontendInput",
+          "data": {
+            "response_text": "음주 상세 소주. 일주일이나 한 달에 몇 번 드시는지 말씀해 주세요. 한 번에 얼마나 드시는지 말씀해 주세요.",
+            "turn_failure_signal": null
+          }
+        },
+        "orchestrator_output": {
+          "contract": "OrchestratorOutput",
+          "data": {
+            "turn_kind": "UTTERANCE",
+            "session_info_created": null,
+            "log_entry": {
+              "input": {
+                "kind": "UTTERANCE",
+                "utterance": "소주 마셔요",
+                "intervention_decision": null
+              },
+              "handling": {
+                "handled": "UTTERANCE"
+              },
+              "question_bank_version": 1,
+              "turn_result": "COMMITTED",
+              "parser_output": {
+                "items": [
+                  {
+                    "item_no": 0,
+                    "target": {
+                      "question_id": "Q3b",
+                      "repeat_key": "",
+                      "slot_id": "종류"
+                    },
+                    "value": "소주",
+                    "source_text": "소주",
+                    "intent": "ANSWERED_INTENT",
+                    "progress_op": null,
+                    "guide_id": null
+                  }
+                ]
+              },
+              "normalizer_output": {
+                "item_checks": [
+                  {
+                    "item_no": 0,
+                    "standard_value": "소주",
+                    "problems": [],
+                    "mismatched_slots": [],
+                    "vs_current": "NO_CURRENT",
+                    "vs_pending": "NO_PENDING",
+                    "risk_rule": null,
+                    "prerequisite_unmet": false
+                  }
+                ],
+                "missing_required_slots": [
+                  {
+                    "question_id": "Q3b",
+                    "repeat_key": "",
+                    "slot_id": "빈도"
+                  },
+                  {
+                    "question_id": "Q3b",
+                    "repeat_key": "",
+                    "slot_id": "1회양"
+                  }
+                ]
+              },
+              "judge_output": {
+                "judgments": [
+                  {
+                    "target": {
+                      "question_id": "Q3b",
+                      "repeat_key": "",
+                      "slot_id": "종류"
+                    },
+                    "status": "ANSWERED",
+                    "reasons": [],
+                    "value_now": "소주",
+                    "said_value": null,
+                    "pending_handling": "NONE",
+                    "target_pending_ids": [],
+                    "mismatched_slots": [],
+                    "risk_rule": null
+                  },
+                  {
+                    "target": {
+                      "question_id": "Q3b",
+                      "repeat_key": "",
+                      "slot_id": "빈도"
+                    },
+                    "status": "MISSING",
+                    "reasons": [
+                      "MISSING_SLOT"
+                    ],
+                    "value_now": null,
+                    "said_value": null,
+                    "pending_handling": "NONE",
+                    "target_pending_ids": [],
+                    "mismatched_slots": [],
+                    "risk_rule": null
+                  },
+                  {
+                    "target": {
+                      "question_id": "Q3b",
+                      "repeat_key": "",
+                      "slot_id": "1회양"
+                    },
+                    "status": "MISSING",
+                    "reasons": [
+                      "MISSING_SLOT"
+                    ],
+                    "value_now": null,
+                    "said_value": null,
+                    "pending_handling": "NONE",
+                    "target_pending_ids": [],
+                    "mismatched_slots": [],
+                    "risk_rule": null
+                  }
+                ],
+                "invalidated_questions": [],
+                "utterance_judgment": {
+                  "result": "HAS_ANSWER",
+                  "valueless_correction_requests": [],
+                  "confirmation": "NONE",
+                  "requests": [],
+                  "risk_signal": null
+                }
+              },
+              "record_writer_output": {
+                "store_decisions": [
+                  {
+                    "slot": {
+                      "question_id": "Q3b",
+                      "repeat_key": "",
+                      "slot_id": "종류"
+                    },
+                    "action": "FIRST_WRITE",
+                    "value": "소주",
+                    "pending_id": null,
+                    "risk_mark": null
+                  }
+                ],
+                "store_summary": {
+                  "changed_slots": [
+                    {
+                      "slot": {
+                        "question_id": "Q3b",
+                        "repeat_key": "",
+                        "slot_id": "종류"
+                      },
+                      "previous_value": null,
+                      "new_value": "소주",
+                      "kind": "FIRST_ANSWER"
+                    }
+                  ],
+                  "unknown_refused_records": [],
+                  "created_pendings": [],
+                  "resolved_pendings": [],
+                  "invalidated_questions": []
+                }
+              },
+              "directive": {
+                "action": "ASK_MISSING",
+                "targets": [
+                  {
+                    "question_id": "Q3b",
+                    "repeat_key": "",
+                    "slot_id": "빈도"
+                  },
+                  {
+                    "question_id": "Q3b",
+                    "repeat_key": "",
+                    "slot_id": "1회양"
+                  }
+                ],
+                "target_pending_id": null,
+                "awaiting": {
+                  "action": "ASK_MISSING",
+                  "targets": [
+                    {
+                      "question_id": "Q3b",
+                      "repeat_key": "",
+                      "slot_id": "빈도"
+                    },
+                    {
+                      "question_id": "Q3b",
+                      "repeat_key": "",
+                      "slot_id": "1회양"
+                    }
+                  ],
+                  "target_pending_id": null,
+                  "say_values": [
+                    {
+                      "slot": {
+                        "question_id": "Q3b",
+                        "repeat_key": "",
+                        "slot_id": "종류"
+                      },
+                      "question_name": "음주 상세",
+                      "value": "소주",
+                      "role": "JUST_SAVED"
+                    }
+                  ]
+                },
+                "say_values": [
+                  {
+                    "slot": {
+                      "question_id": "Q3b",
+                      "repeat_key": "",
+                      "slot_id": "종류"
+                    },
+                    "question_name": "음주 상세",
+                    "value": "소주",
+                    "role": "JUST_SAVED"
+                  }
+                ],
+                "reask_reasons": [],
+                "notices": [],
+                "sentence_materials": {
+                  "question_sentences": [],
+                  "refusal_explanations": [],
+                  "reask_sentences": [
+                    {
+                      "slot": {
+                        "question_id": "Q3b",
+                        "repeat_key": "",
+                        "slot_id": "빈도"
+                      },
+                      "sentence": "일주일이나 한 달에 몇 번 드시는지 말씀해 주세요."
+                    },
+                    {
+                      "slot": {
+                        "question_id": "Q3b",
+                        "repeat_key": "",
+                        "slot_id": "1회양"
+                      },
+                      "sentence": "한 번에 얼마나 드시는지 말씀해 주세요."
+                    }
+                  ],
+                  "choices": [],
+                  "guide_sentences": [],
+                  "fixed_sentences": []
+                }
+              },
+              "flow": "CONTINUE",
+              "progress_record_update": {
+                "last_directive": {
+                  "action": "ASK_MISSING",
+                  "targets": [
+                    {
+                      "question_id": "Q3b",
+                      "repeat_key": "",
+                      "slot_id": "빈도"
+                    },
+                    {
+                      "question_id": "Q3b",
+                      "repeat_key": "",
+                      "slot_id": "1회양"
+                    }
+                  ],
+                  "target_pending_id": null,
+                  "awaiting": {
+                    "action": "ASK_MISSING",
+                    "targets": [
+                      {
+                        "question_id": "Q3b",
+                        "repeat_key": "",
+                        "slot_id": "빈도"
+                      },
+                      {
+                        "question_id": "Q3b",
+                        "repeat_key": "",
+                        "slot_id": "1회양"
+                      }
+                    ],
+                    "target_pending_id": null,
+                    "say_values": [
+                      {
+                        "slot": {
+                          "question_id": "Q3b",
+                          "repeat_key": "",
+                          "slot_id": "종류"
+                        },
+                        "question_name": "음주 상세",
+                        "value": "소주",
+                        "role": "JUST_SAVED"
+                      }
+                    ]
+                  },
+                  "say_values": [
+                    {
+                      "slot": {
+                        "question_id": "Q3b",
+                        "repeat_key": "",
+                        "slot_id": "종류"
+                      },
+                      "question_name": "음주 상세",
+                      "value": "소주",
+                      "role": "JUST_SAVED"
+                    }
+                  ],
+                  "reask_reasons": [],
+                  "notices": [],
+                  "sentence_materials": {
+                    "question_sentences": [],
+                    "refusal_explanations": [],
+                    "reask_sentences": [
+                      {
+                        "slot": {
+                          "question_id": "Q3b",
+                          "repeat_key": "",
+                          "slot_id": "빈도"
+                        },
+                        "sentence": "일주일이나 한 달에 몇 번 드시는지 말씀해 주세요."
+                      },
+                      {
+                        "slot": {
+                          "question_id": "Q3b",
+                          "repeat_key": "",
+                          "slot_id": "1회양"
+                        },
+                        "sentence": "한 번에 얼마나 드시는지 말씀해 주세요."
+                      }
+                    ],
+                    "choices": [],
+                    "guide_sentences": [],
+                    "fixed_sentences": []
+                  }
+                },
+                "open_requests": {
+                  "correction_requests": [],
+                  "stop_requested": false,
+                  "deferred": []
+                },
+                "skipped_add": [],
+                "skipped_remove": [],
+                "confirm_stopped_add": [],
+                "confirm_stopped_remove": [],
+                "session_status": null,
+                "pause_history_add": []
+              },
+              "staff_alert": null,
+              "response_text": "음주 상세 소주. 일주일이나 한 달에 몇 번 드시는지 말씀해 주세요. 한 번에 얼마나 드시는지 말씀해 주세요.",
+              "staff_alert_delivery": "NOT_APPLICABLE",
+              "turn_failure_signal": null,
+              "intervention_result": null
+            },
+            "turn_failure_signal": null,
+            "intervention_result": null,
+            "dispatch_called": false
+          }
+        },
+        "db_final": {
+          "contract": "SessionStore",
+          "data": {
+            "session_info": {
+              "session_id": "S-TEST",
+              "question_bank_version": 1
+            },
+            "answer_records": [
+              {
+                "slot": {
+                  "question_id": "Q1",
+                  "repeat_key": "",
+                  "slot_id": "상태"
+                },
+                "current_value": {
+                  "answer": "안 피움"
+                },
+                "risk_mark": null,
+                "history": [],
+                "pending": null
+              },
+              {
+                "slot": {
+                  "question_id": "Q2",
+                  "repeat_key": "",
+                  "slot_id": "개비"
+                },
+                "current_value": "NONE",
+                "risk_mark": null,
+                "history": [],
+                "pending": null
+              },
+              {
+                "slot": {
+                  "question_id": "Q3a",
+                  "repeat_key": "",
+                  "slot_id": "여부"
+                },
+                "current_value": {
+                  "answer": "마심"
+                },
+                "risk_mark": null,
+                "history": [],
+                "pending": null
+              },
+              {
+                "slot": {
+                  "question_id": "Q3b",
+                  "repeat_key": "",
+                  "slot_id": "빈도"
+                },
+                "current_value": "NONE",
+                "risk_mark": null,
+                "history": [],
+                "pending": null
+              },
+              {
+                "slot": {
+                  "question_id": "Q3b",
+                  "repeat_key": "",
+                  "slot_id": "종류"
+                },
+                "current_value": {
+                  "answer": "소주"
+                },
+                "risk_mark": null,
+                "history": [],
+                "pending": null
+              },
+              {
+                "slot": {
+                  "question_id": "Q3b",
+                  "repeat_key": "",
+                  "slot_id": "1회양"
+                },
+                "current_value": "NONE",
+                "risk_mark": null,
+                "history": [],
+                "pending": null
+              },
+              {
+                "slot": {
+                  "question_id": "Q4",
+                  "repeat_key": "",
+                  "slot_id": "여부"
+                },
+                "current_value": "NONE",
+                "risk_mark": null,
+                "history": [],
+                "pending": null
+              },
+              {
+                "slot": {
+                  "question_id": "Q5",
+                  "repeat_key": "",
+                  "slot_id": "시간"
+                },
+                "current_value": "NONE",
+                "risk_mark": null,
+                "history": [],
+                "pending": null
+              },
+              {
+                "slot": {
+                  "question_id": "Q6",
+                  "repeat_key": "",
+                  "slot_id": "여부"
+                },
+                "current_value": "NONE",
+                "risk_mark": null,
+                "history": [],
+                "pending": null
+              },
+              {
+                "slot": {
+                  "question_id": "Q7",
+                  "repeat_key": "",
+                  "slot_id": "수축기"
+                },
+                "current_value": "NONE",
+                "risk_mark": null,
+                "history": [],
+                "pending": null
+              },
+              {
+                "slot": {
+                  "question_id": "Q7",
+                  "repeat_key": "",
+                  "slot_id": "이완기"
+                },
+                "current_value": "NONE",
+                "risk_mark": null,
+                "history": [],
+                "pending": null
+              },
+              {
+                "slot": {
+                  "question_id": "Q8",
+                  "repeat_key": "",
+                  "slot_id": "횟수"
+                },
+                "current_value": "NONE",
+                "risk_mark": null,
+                "history": [],
+                "pending": null
+              },
+              {
+                "slot": {
+                  "question_id": "Q3c",
+                  "repeat_key": "소주",
+                  "slot_id": "양"
+                },
+                "current_value": "NONE",
+                "risk_mark": null,
+                "history": [],
+                "pending": null
+              },
+              {
+                "slot": {
+                  "question_id": "Q3c",
+                  "repeat_key": "맥주",
+                  "slot_id": "양"
+                },
+                "current_value": "NONE",
+                "risk_mark": null,
+                "history": [],
+                "pending": null
+              },
+              {
+                "slot": {
+                  "question_id": "Q3c",
+                  "repeat_key": "막걸리",
+                  "slot_id": "양"
+                },
+                "current_value": "NONE",
+                "risk_mark": null,
+                "history": [],
+                "pending": null
+              },
+              {
+                "slot": {
+                  "question_id": "Q3c",
+                  "repeat_key": "와인",
+                  "slot_id": "양"
+                },
+                "current_value": "NONE",
+                "risk_mark": null,
+                "history": [],
+                "pending": null
+              },
+              {
+                "slot": {
+                  "question_id": "Q3c",
+                  "repeat_key": "기타",
+                  "slot_id": "양"
+                },
+                "current_value": "NONE",
+                "risk_mark": null,
+                "history": [],
+                "pending": null
+              }
+            ],
+            "progress_record": {
+              "last_directive": {
+                "action": "ASK_MISSING",
+                "targets": [
+                  {
+                    "question_id": "Q3b",
+                    "repeat_key": "",
+                    "slot_id": "빈도"
+                  },
+                  {
+                    "question_id": "Q3b",
+                    "repeat_key": "",
+                    "slot_id": "1회양"
+                  }
+                ],
+                "target_pending_id": null,
+                "awaiting": {
+                  "action": "ASK_MISSING",
+                  "targets": [
+                    {
+                      "question_id": "Q3b",
+                      "repeat_key": "",
+                      "slot_id": "빈도"
+                    },
+                    {
+                      "question_id": "Q3b",
+                      "repeat_key": "",
+                      "slot_id": "1회양"
+                    }
+                  ],
+                  "target_pending_id": null,
+                  "say_values": [
+                    {
+                      "slot": {
+                        "question_id": "Q3b",
+                        "repeat_key": "",
+                        "slot_id": "종류"
+                      },
+                      "question_name": "음주 상세",
+                      "value": "소주",
+                      "role": "JUST_SAVED"
+                    }
+                  ]
+                },
+                "say_values": [
+                  {
+                    "slot": {
+                      "question_id": "Q3b",
+                      "repeat_key": "",
+                      "slot_id": "종류"
+                    },
+                    "question_name": "음주 상세",
+                    "value": "소주",
+                    "role": "JUST_SAVED"
+                  }
+                ],
+                "reask_reasons": [],
+                "notices": [],
+                "sentence_materials": {
+                  "question_sentences": [],
+                  "refusal_explanations": [],
+                  "reask_sentences": [
+                    {
+                      "slot": {
+                        "question_id": "Q3b",
+                        "repeat_key": "",
+                        "slot_id": "빈도"
+                      },
+                      "sentence": "일주일이나 한 달에 몇 번 드시는지 말씀해 주세요."
+                    },
+                    {
+                      "slot": {
+                        "question_id": "Q3b",
+                        "repeat_key": "",
+                        "slot_id": "1회양"
+                      },
+                      "sentence": "한 번에 얼마나 드시는지 말씀해 주세요."
+                    }
+                  ],
+                  "choices": [],
+                  "guide_sentences": [],
+                  "fixed_sentences": []
+                }
+              },
+              "open_requests": {
+                "correction_requests": [],
+                "stop_requested": false,
+                "deferred": []
+              },
+              "skipped": [],
+              "confirm_stopped": [],
+              "session_status": "IN_PROGRESS",
+              "pause_history": []
+            },
+            "planner_record": {
+              "attempt_counts": [
+                {
+                  "question_id": "Q3b",
+                  "count": 1
+                }
+              ],
+              "confirm_counts": [],
+              "unknown_counts": [],
+              "refusal_counts": [],
+              "unrecognized_streak": 0,
+              "ask_counts": []
+            },
+            "dialogue_log": [
+              {
+                "input": {
+                  "kind": "UTTERANCE",
+                  "utterance": "소주 마셔요",
+                  "intervention_decision": null
+                },
+                "handling": {
+                  "handled": "UTTERANCE"
+                },
+                "question_bank_version": 1,
+                "turn_result": "COMMITTED",
+                "parser_output": {
+                  "items": [
+                    {
+                      "item_no": 0,
+                      "target": {
+                        "question_id": "Q3b",
+                        "repeat_key": "",
+                        "slot_id": "종류"
+                      },
+                      "value": "소주",
+                      "source_text": "소주",
+                      "intent": "ANSWERED_INTENT",
+                      "progress_op": null,
+                      "guide_id": null
+                    }
+                  ]
+                },
+                "normalizer_output": {
+                  "item_checks": [
+                    {
+                      "item_no": 0,
+                      "standard_value": "소주",
+                      "problems": [],
+                      "mismatched_slots": [],
+                      "vs_current": "NO_CURRENT",
+                      "vs_pending": "NO_PENDING",
+                      "risk_rule": null,
+                      "prerequisite_unmet": false
+                    }
+                  ],
+                  "missing_required_slots": [
+                    {
+                      "question_id": "Q3b",
+                      "repeat_key": "",
+                      "slot_id": "빈도"
+                    },
+                    {
+                      "question_id": "Q3b",
+                      "repeat_key": "",
+                      "slot_id": "1회양"
+                    }
+                  ]
+                },
+                "judge_output": {
+                  "judgments": [
+                    {
+                      "target": {
+                        "question_id": "Q3b",
+                        "repeat_key": "",
+                        "slot_id": "종류"
+                      },
+                      "status": "ANSWERED",
+                      "reasons": [],
+                      "value_now": "소주",
+                      "said_value": null,
+                      "pending_handling": "NONE",
+                      "target_pending_ids": [],
+                      "mismatched_slots": [],
+                      "risk_rule": null
+                    },
+                    {
+                      "target": {
+                        "question_id": "Q3b",
+                        "repeat_key": "",
+                        "slot_id": "빈도"
+                      },
+                      "status": "MISSING",
+                      "reasons": [
+                        "MISSING_SLOT"
+                      ],
+                      "value_now": null,
+                      "said_value": null,
+                      "pending_handling": "NONE",
+                      "target_pending_ids": [],
+                      "mismatched_slots": [],
+                      "risk_rule": null
+                    },
+                    {
+                      "target": {
+                        "question_id": "Q3b",
+                        "repeat_key": "",
+                        "slot_id": "1회양"
+                      },
+                      "status": "MISSING",
+                      "reasons": [
+                        "MISSING_SLOT"
+                      ],
+                      "value_now": null,
+                      "said_value": null,
+                      "pending_handling": "NONE",
+                      "target_pending_ids": [],
+                      "mismatched_slots": [],
+                      "risk_rule": null
+                    }
+                  ],
+                  "invalidated_questions": [],
+                  "utterance_judgment": {
+                    "result": "HAS_ANSWER",
+                    "valueless_correction_requests": [],
+                    "confirmation": "NONE",
+                    "requests": [],
+                    "risk_signal": null
+                  }
+                },
+                "record_writer_output": {
+                  "store_decisions": [
+                    {
+                      "slot": {
+                        "question_id": "Q3b",
+                        "repeat_key": "",
+                        "slot_id": "종류"
+                      },
+                      "action": "FIRST_WRITE",
+                      "value": "소주",
+                      "pending_id": null,
+                      "risk_mark": null
+                    }
+                  ],
+                  "store_summary": {
+                    "changed_slots": [
+                      {
+                        "slot": {
+                          "question_id": "Q3b",
+                          "repeat_key": "",
+                          "slot_id": "종류"
+                        },
+                        "previous_value": null,
+                        "new_value": "소주",
+                        "kind": "FIRST_ANSWER"
+                      }
+                    ],
+                    "unknown_refused_records": [],
+                    "created_pendings": [],
+                    "resolved_pendings": [],
+                    "invalidated_questions": []
+                  }
+                },
+                "directive": {
+                  "action": "ASK_MISSING",
+                  "targets": [
+                    {
+                      "question_id": "Q3b",
+                      "repeat_key": "",
+                      "slot_id": "빈도"
+                    },
+                    {
+                      "question_id": "Q3b",
+                      "repeat_key": "",
+                      "slot_id": "1회양"
+                    }
+                  ],
+                  "target_pending_id": null,
+                  "awaiting": {
+                    "action": "ASK_MISSING",
+                    "targets": [
+                      {
+                        "question_id": "Q3b",
+                        "repeat_key": "",
+                        "slot_id": "빈도"
+                      },
+                      {
+                        "question_id": "Q3b",
+                        "repeat_key": "",
+                        "slot_id": "1회양"
+                      }
+                    ],
+                    "target_pending_id": null,
+                    "say_values": [
+                      {
+                        "slot": {
+                          "question_id": "Q3b",
+                          "repeat_key": "",
+                          "slot_id": "종류"
+                        },
+                        "question_name": "음주 상세",
+                        "value": "소주",
+                        "role": "JUST_SAVED"
+                      }
+                    ]
+                  },
+                  "say_values": [
+                    {
+                      "slot": {
+                        "question_id": "Q3b",
+                        "repeat_key": "",
+                        "slot_id": "종류"
+                      },
+                      "question_name": "음주 상세",
+                      "value": "소주",
+                      "role": "JUST_SAVED"
+                    }
+                  ],
+                  "reask_reasons": [],
+                  "notices": [],
+                  "sentence_materials": {
+                    "question_sentences": [],
+                    "refusal_explanations": [],
+                    "reask_sentences": [
+                      {
+                        "slot": {
+                          "question_id": "Q3b",
+                          "repeat_key": "",
+                          "slot_id": "빈도"
+                        },
+                        "sentence": "일주일이나 한 달에 몇 번 드시는지 말씀해 주세요."
+                      },
+                      {
+                        "slot": {
+                          "question_id": "Q3b",
+                          "repeat_key": "",
+                          "slot_id": "1회양"
+                        },
+                        "sentence": "한 번에 얼마나 드시는지 말씀해 주세요."
+                      }
+                    ],
+                    "choices": [],
+                    "guide_sentences": [],
+                    "fixed_sentences": []
+                  }
+                },
+                "flow": "CONTINUE",
+                "progress_record_update": {
+                  "last_directive": {
+                    "action": "ASK_MISSING",
+                    "targets": [
+                      {
+                        "question_id": "Q3b",
+                        "repeat_key": "",
+                        "slot_id": "빈도"
+                      },
+                      {
+                        "question_id": "Q3b",
+                        "repeat_key": "",
+                        "slot_id": "1회양"
+                      }
+                    ],
+                    "target_pending_id": null,
+                    "awaiting": {
+                      "action": "ASK_MISSING",
+                      "targets": [
+                        {
+                          "question_id": "Q3b",
+                          "repeat_key": "",
+                          "slot_id": "빈도"
+                        },
+                        {
+                          "question_id": "Q3b",
+                          "repeat_key": "",
+                          "slot_id": "1회양"
+                        }
+                      ],
+                      "target_pending_id": null,
+                      "say_values": [
+                        {
+                          "slot": {
+                            "question_id": "Q3b",
+                            "repeat_key": "",
+                            "slot_id": "종류"
+                          },
+                          "question_name": "음주 상세",
+                          "value": "소주",
+                          "role": "JUST_SAVED"
+                        }
+                      ]
+                    },
+                    "say_values": [
+                      {
+                        "slot": {
+                          "question_id": "Q3b",
+                          "repeat_key": "",
+                          "slot_id": "종류"
+                        },
+                        "question_name": "음주 상세",
+                        "value": "소주",
+                        "role": "JUST_SAVED"
+                      }
+                    ],
+                    "reask_reasons": [],
+                    "notices": [],
+                    "sentence_materials": {
+                      "question_sentences": [],
+                      "refusal_explanations": [],
+                      "reask_sentences": [
+                        {
+                          "slot": {
+                            "question_id": "Q3b",
+                            "repeat_key": "",
+                            "slot_id": "빈도"
+                          },
+                          "sentence": "일주일이나 한 달에 몇 번 드시는지 말씀해 주세요."
+                        },
+                        {
+                          "slot": {
+                            "question_id": "Q3b",
+                            "repeat_key": "",
+                            "slot_id": "1회양"
+                          },
+                          "sentence": "한 번에 얼마나 드시는지 말씀해 주세요."
+                        }
+                      ],
+                      "choices": [],
+                      "guide_sentences": [],
+                      "fixed_sentences": []
+                    }
+                  },
+                  "open_requests": {
+                    "correction_requests": [],
+                    "stop_requested": false,
+                    "deferred": []
+                  },
+                  "skipped_add": [],
+                  "skipped_remove": [],
+                  "confirm_stopped_add": [],
+                  "confirm_stopped_remove": [],
+                  "session_status": null,
+                  "pause_history_add": []
+                },
+                "staff_alert": null,
+                "response_text": "음주 상세 소주. 일주일이나 한 달에 몇 번 드시는지 말씀해 주세요. 한 번에 얼마나 드시는지 말씀해 주세요.",
+                "staff_alert_delivery": "NOT_APPLICABLE",
+                "turn_failure_signal": null,
+                "intervention_result": null
+              }
+            ],
+            "dispatch_log": []
+          }
+        }
+      },
+      "assertions": [
+        {
+          "id": "a01",
+          "desc": "LoRA-A 항목: 의도 ANSWERED_INTENT → Q3b.종류",
+          "path": "lora_a_output.items",
+          "op": "contains_subset",
+          "value": [
+            {
+              "intent": "ANSWERED_INTENT",
+              "target": {
+                "question_id": "Q3b",
+                "slot_id": "종류"
+              }
+            }
+          ],
+          "source": "/expect/LoRA-A/0"
+        },
+        {
+          "id": "a02",
+          "desc": "판정: Q3b.종류 ANSWERED",
+          "path": "judge_output.judgments",
+          "op": "contains_subset",
+          "value": [
+            {
+              "status": "ANSWERED",
+              "target": {
+                "question_id": "Q3b",
+                "slot_id": "종류"
+              }
+            }
+          ],
+          "source": "/expect/판정/0"
+        },
+        {
+          "id": "a03",
+          "desc": "판정: Q3b.빈도 MISSING",
+          "path": "judge_output.judgments",
+          "op": "contains_subset",
+          "value": [
+            {
+              "status": "MISSING",
+              "target": {
+                "question_id": "Q3b",
+                "slot_id": "빈도"
+              }
+            }
+          ],
+          "source": "/expect/판정/1"
+        },
+        {
+          "id": "a04",
+          "desc": "판정: Q3b.1회양 MISSING",
+          "path": "judge_output.judgments",
+          "op": "contains_subset",
+          "value": [
+            {
+              "status": "MISSING",
+              "target": {
+                "question_id": "Q3b",
+                "slot_id": "1회양"
+              }
+            }
+          ],
+          "source": "/expect/판정/2"
+        },
+        {
+          "id": "a05",
+          "desc": "저장 결정: Q3b.종류 FIRST_WRITE",
+          "path": "db_result.store_decisions",
+          "op": "contains_subset",
+          "value": [
+            {
+              "action": "FIRST_WRITE",
+              "slot": {
+                "question_id": "Q3b",
+                "slot_id": "종류"
+              }
+            }
+          ],
+          "source": "/expect/저장/0"
+        },
+        {
+          "id": "a06",
+          "desc": "Transition Plan 행동 ASK_MISSING",
+          "path": "transition_plan.directive.action",
+          "op": "equals",
+          "value": "ASK_MISSING",
+          "source": "/expect/Plan/행동"
+        },
+        {
+          "id": "a07",
+          "desc": "Plan 대상 Q3b.빈도,Q3b.1회양",
+          "path": "transition_plan.directive.targets",
+          "op": "contains_subset",
+          "value": [
+            {
+              "question_id": "Q3b",
+              "slot_id": "빈도"
+            },
+            {
+              "question_id": "Q3b",
+              "slot_id": "1회양"
+            }
+          ],
+          "source": "/expect/Plan/대상"
+        }
+      ],
+      "fixture_notes": []
+    }
+  ]
+}

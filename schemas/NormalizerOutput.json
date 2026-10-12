@@ -1,0 +1,206 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "standalone/NormalizerOutput.json",
+  "$ref": "#/$defs/NormalizerOutput",
+  "$defs": {
+    "ItemCheck": {
+      "type": "object",
+      "properties": {
+        "item_no": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000
+        },
+        "standard_value": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Value"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "problems": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Problem"
+          },
+          "maxItems": 5,
+          "uniqueItems": true
+        },
+        "mismatched_slots": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SlotRef"
+          },
+          "maxItems": 20
+        },
+        "vs_current": {
+          "oneOf": [
+            {
+              "const": "EQUAL"
+            },
+            {
+              "const": "DIFFERENT"
+            },
+            {
+              "const": "NO_CURRENT"
+            },
+            {
+              "const": "NOT_APPLICABLE"
+            }
+          ]
+        },
+        "vs_pending": {
+          "oneOf": [
+            {
+              "const": "EQUAL"
+            },
+            {
+              "const": "DIFFERENT"
+            },
+            {
+              "const": "NO_PENDING"
+            },
+            {
+              "const": "NOT_APPLICABLE"
+            }
+          ]
+        },
+        "risk_rule": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/RiskResponse"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "prerequisite_unmet": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "item_no",
+        "standard_value",
+        "problems",
+        "mismatched_slots",
+        "vs_current",
+        "vs_pending",
+        "risk_rule",
+        "prerequisite_unmet"
+      ],
+      "additionalProperties": false
+    },
+    "NormalizerOutput": {
+      "type": "object",
+      "properties": {
+        "item_checks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ItemCheck"
+          },
+          "maxItems": 50
+        },
+        "missing_required_slots": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SlotRef"
+          },
+          "maxItems": 50
+        }
+      },
+      "required": [
+        "item_checks",
+        "missing_required_slots"
+      ],
+      "additionalProperties": false
+    },
+    "Problem": {
+      "oneOf": [
+        {
+          "const": "NO_UNIT"
+        },
+        {
+          "const": "OUT_OF_RANGE"
+        },
+        {
+          "const": "AMBIGUOUS"
+        },
+        {
+          "const": "MISMATCH"
+        },
+        {
+          "const": "UNKNOWN_TARGET"
+        }
+      ]
+    },
+    "QuestionId": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9가-힣_.\\-]{1,64}$"
+    },
+    "RiskResponse": {
+      "oneOf": [
+        {
+          "const": "IMMEDIATE"
+        },
+        {
+          "const": "ON_RESULT"
+        }
+      ]
+    },
+    "SlotRef": {
+      "type": "object",
+      "properties": {
+        "question_id": {
+          "$ref": "#/$defs/QuestionId"
+        },
+        "repeat_key": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9가-힣_.\\-]{0,64}$"
+        },
+        "slot_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9가-힣_.\\-]{1,64}$"
+        }
+      },
+      "required": [
+        "question_id",
+        "repeat_key",
+        "slot_id"
+      ],
+      "additionalProperties": false
+    },
+    "Value": {
+      "oneOf": [
+        {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        {
+          "type": "object",
+          "properties": {
+            "amount": {
+              "type": "number",
+              "minimum": -100000,
+              "maximum": 100000
+            },
+            "unit": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 2000
+            }
+          },
+          "required": [
+            "amount",
+            "unit"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    }
+  }
+}
